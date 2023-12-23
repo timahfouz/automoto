@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Categories
+    Brands
 @endsection
 
 @section('content')
@@ -9,11 +9,11 @@
         <div class="widget-header" >
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4> Categories List
+                    <h4> Brands List
 
                     </h4>
                     <div class="float-lg-right">
-                        <a class="btn btn-primary" href="{{ route('admin.categories.create') }}"> Add Category </a>
+                        <a class="btn btn-primary" href="{{ route('admin.brands.create') }}"> Add new brand </a>
                     </div>
                 </div>
             </div>
@@ -24,10 +24,9 @@
 
                     <thead>
                     <tr>
-                        <th class="">Name</th>
-                        <th class="">Brands Category</th>
-                        <th class="">Job Category</th>
-                        <th class="">Alert Category</th>
+                        <th class="">Brand ID</th>
+                        <th class="">Brand Name</th>
+                        <th class="">Brand Image</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -35,21 +34,17 @@
                         @foreach($items as $item)
                         <tr>
                             <td class="checkbox-column">
-                                <img class="avatar" src="{{ imagePath($item->image->path) }}" alt="">
+                                {{ $item->id }}
+                            </td>
+                            <td class="checkbox-column">
                                 {{ $item->name }}
                             </td>
                             <td class="checkbox-column">
-                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_brands ? 'up' : 'down' }} text-{{ $item->for_brands ? 'primary' : 'danger' }}"></span>
-                            </td>
-                            <td class="checkbox-column">
-                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_jobs ? 'up' : 'down' }} text-{{ $item->for_jobs ? 'primary' : 'danger' }}"></span>
-                            </td>
-                            <td class="checkbox-column">
-                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_alarm ? 'up' : 'down' }} text-{{ $item->for_alarm ? 'primary' : 'danger' }}"></span>
+                                <img class="avatar" src="{{ imagePath($item->image->path) }}" alt="">
                             </td>
 
                             <td class="text-center">
-                                <a data-toggle="tooltip" href="{{ route('admin.categories.edit', $item->id) }}"
+                                <a data-toggle="tooltip" href="{{ route('admin.brands.edit', $item->id) }}"
                                 data-placement="top" title="" data-original-title="Edit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none"

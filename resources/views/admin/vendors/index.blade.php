@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Categories
+    Vendors
 @endsection
 
 @section('content')
@@ -9,11 +9,11 @@
         <div class="widget-header" >
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4> Categories List
+                    <h4> Vendors List
 
                     </h4>
                     <div class="float-lg-right">
-                        <a class="btn btn-primary" href="{{ route('admin.categories.create') }}"> Add Category </a>
+                        <a class="btn btn-primary" href="{{ route('admin.vendors.create') }}">Add new vendor</a>
                     </div>
                 </div>
             </div>
@@ -24,10 +24,13 @@
 
                     <thead>
                     <tr>
+                        <th class="">ID</th>
                         <th class="">Name</th>
-                        <th class="">Brands Category</th>
-                        <th class="">Job Category</th>
-                        <th class="">Alert Category</th>
+                        <th class="">City</th>
+                        <th class="">Category</th>
+                        <th class="">Brand</th>
+                        <th class="">Service</th>
+                        <th class="">Location</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -35,21 +38,30 @@
                         @foreach($items as $item)
                         <tr>
                             <td class="checkbox-column">
+                                {{ $item->id }}
+                            </td>
+                            <td class="checkbox-column">
                                 <img class="avatar" src="{{ imagePath($item->image->path) }}" alt="">
                                 {{ $item->name }}
                             </td>
                             <td class="checkbox-column">
-                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_brands ? 'up' : 'down' }} text-{{ $item->for_brands ? 'primary' : 'danger' }}"></span>
+                                {{ $item->city->name }}
                             </td>
                             <td class="checkbox-column">
-                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_jobs ? 'up' : 'down' }} text-{{ $item->for_jobs ? 'primary' : 'danger' }}"></span>
+                                {{ $item->category->name }}
                             </td>
                             <td class="checkbox-column">
-                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_alarm ? 'up' : 'down' }} text-{{ $item->for_alarm ? 'primary' : 'danger' }}"></span>
+                                {{ $item->brand->name ?? '---' }}
+                            </td>
+                            <td class="checkbox-column">
+                                {{ $item->service->name ?? '---' }}
+                            </td>
+                            <td class="checkbox-column">
+                                <a href="{{ $item->geo_url }}">Click here</a>
                             </td>
 
                             <td class="text-center">
-                                <a data-toggle="tooltip" href="{{ route('admin.categories.edit', $item->id) }}"
+                                <a data-toggle="tooltip" href="{{ route('admin.vendors.edit', $item->id) }}"
                                 data-placement="top" title="" data-original-title="Edit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none"

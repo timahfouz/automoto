@@ -33,9 +33,11 @@ Route::group(['middleware' => ['auth:admin'], 'namespace' => 'Admin', 'as' => 'a
     
     Route::resource('categories', 'CategoryController');
 
+    Route::resource('brands', 'BrandController');
+
     Route::resource('services', 'ServiceController');
 
-    Route::resource('cases', 'CaseController');
+    Route::resource('vendors', 'VendorController');
 
     Route::get('donations', ['as' => 'donations.index', 'uses' => 'DonationController@index']);
 

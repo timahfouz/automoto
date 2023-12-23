@@ -15,6 +15,12 @@
 </div>
 
 <div class="form-group mb-4 col-md-2">
+    <label for="for_brands">Related to brands?</label>
+    <input type="checkbox" class="" id="for_brands"
+        name="for_brands" {{ (isset($item) && $item->for_brands ? 'checked' : '') }}>
+</div>
+
+<div class="form-group mb-4 col-md-2">
     <label for="for_jobs">Job Category</label>
     <input type="checkbox" class="" id="for_jobs"
         name="for_jobs" {{ (isset($item) && $item->for_jobs ? 'checked' : '') }}>

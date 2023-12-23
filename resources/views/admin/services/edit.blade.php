@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="widget-content widget-content-area">
-                {{ Form::open(['route' => ['admin.services.update', $item->id], 'method' => 'PUT' ]) }}
+                {{ Form::open(['route' => ['admin.services.update', $item->id], 'method' => 'PUT', 'files' => true ]) }}
 
                     @include('admin.services._form')
 

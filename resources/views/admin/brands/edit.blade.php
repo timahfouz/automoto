@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('title')
-    Creating Service
+    Updating Brand
 @endsection
 @section('content')
     <div class="col-lg-12 col-12 layout-spacing">
@@ -8,19 +8,22 @@
             <div class="widget-header">
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <h4>Service Details</h4>
+                        <h4>Brand Details</h4>
                     </div>
                 </div>
             </div>
             <div class="widget-content widget-content-area">
-            {{ Form::open(['route' => ['admin.services.store'], 'method' => 'POST', 'files' => true ]) }}
+                {{ Form::open(['route' => ['admin.brands.update', $item->id], 'method' => 'PUT', 'files' => true ]) }}
 
-                @include('admin.services._form')
+                    @include('admin.brands._form')
 
-                <input type="submit" value="Save" class="mt-4 mb-4 btn btn-primary">
-            {{ Form::close() }}
+                    <input type="submit" value="Save" class="mt-4 mb-4 btn btn-primary">
+                {{ Form::close() }}
 
             </div>
         </div>
     </div>
+
+
+
 @endsection

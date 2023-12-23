@@ -6,6 +6,16 @@
     </div>
 </div>
 
+
+<div class="row">
+    <div class="form-group mb-4 col-md-6">
+        <label for="name"> Service Name:</label>
+        <input type="text" required class="form-control @error('name') is-invalid @enderror" id="name"
+                name="name" placeholder="Name" value="{{old('name', (isset($item) ? $item->name : ''))}}">
+    </div>
+</div>
+
+
 <div class="row">
     <div class="form-group mb-4 col-md-6">
         <label for="city_id"> Select City:</label>
@@ -27,20 +37,17 @@
         </select>
     </div>
 </div>
-
+<!-- 
 <div class="row">
     <div class="form-group mb-4 col-md-6">
-        <label for="name"> Service Name:</label>
-        <input type="text" required class="form-control @error('name') is-invalid @enderror" id="name"
-                name="name" placeholder="Name" value="{{old('name', (isset($item) ? $item->name : ''))}}">
+        <label for="brand_id"> Select Brand (optional):</label>
+        <select required class="form-control" id="brand_id" name="brand_id">
+            <option value="">Select Brand</option>
+            @foreach($brands as $brand)
+            <option {{(isset($item) ? ($item->brand_id == $brand->id) ? 'selected' : '' : '')}} value="{{ $brand->id }}">{{ $brand->name }}</option>
+            @endforeach
+        </select>
     </div>
-</div>
-
-
-<div class="form-group mb-4 col-md-2">
-    <label for="is_brand">Is it a new brand?</label>
-    <input type="checkbox" class="" id="is_brand"
-        name="is_brand" {{ (isset($item) && $item->is_brand ? 'checked' : '') }}>
 </div>
 
 <div class="form-group mb-4 col-md-2">
@@ -54,4 +61,4 @@
     <label for="for_alarm">Alert Service</label>
     <input type="checkbox" class="" id="for_alarm"
         name="for_alarm" {{ (isset($item) && $item->for_alarm ? 'checked' : '') }}>
-</div>
+</div> -->

@@ -26,8 +26,8 @@
                     <tr>
                         <th class="">Service ID</th>
                         <th class="">Service Name</th>
-                        <th class="">Category</th>
                         <th class="">City</th>
+                        <th class="">Category</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -35,18 +35,18 @@
                         @foreach($items as $item)
                         <tr>
                             <td class="checkbox-column">
-                                <img class="avatar" src="{{ imagePath($item->image->path) }}" alt="">
                                 {{ $item->id }}
                             </td>
                             <td class="checkbox-column">
+                                <img class="avatar" src="{{ imagePath($item->image->path) }}" alt="">
                                 {{ $item->name }}
+                            </td>
+                            <td class="checkbox-column">
+                                {{ $item->city->name }}
                             </td>
                             <td class="checkbox-column">
                                 <img class="avatar" src="{{ $item->category ? imagePath($item->category->image->path) : '' }}" alt="">
                                 {{ $item->category->name }}
-                            </td>
-                            <td class="checkbox-column">
-                                {{ $item->city->name }}
                             </td>
 
                             <td class="text-center">

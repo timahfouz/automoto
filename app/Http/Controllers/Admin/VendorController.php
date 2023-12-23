@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\Services\CreateRequest;
-use App\Http\Requests\Admin\Services\UpdateRequest;
 use Illuminate\Support\Facades\View;
-// use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Vendors\CreateRequest;
+use App\Http\Requests\Admin\Vendors\UpdateRequest;
 
-class ServiceController extends CRUDController
+class VendorController extends CRUDController
 {
-    protected $model = 'Service';
-    protected $index_route = 'admin.services.index';
-    protected $delete_route = 'admin.services.destroy';
+    protected $model = 'Vendor';
+    protected $index_route = 'admin.vendors.index';
+    protected $delete_route = 'admin.vendors.destroy';
     
-    protected $index_view = 'admin.services.index';
-    protected $edit_view = 'admin.services.edit';
-    protected $create_view = 'admin.services.create';
+    protected $index_view = 'admin.vendors.index';
+    protected $edit_view = 'admin.vendors.edit';
+    protected $create_view = 'admin.vendors.create';
 
     protected $store_request = CreateRequest::class;
     protected $update_request = UpdateRequest::class;
@@ -25,14 +24,16 @@ class ServiceController extends CRUDController
     public function __construct()
     {
         parent::__construct();
-        if(in_array(\Request::route()->getName(), ["admin.services.create","admin.services.edit"])) {
+        if(in_array(\Request::route()->getName(), ["admin.vendors.create","admin.vendors.edit"])) {
             $cities = $this->pipeline->setModel('City')->whereNull('parent_id')->get();
-            $categories = $this->pipeline->setModel('Category')->where(['for_brands' => 0])->get();
+            $categories = $this->pipeline->setModel('Category')->get();
             $brands = $this->pipeline->setModel('Brand')->get();
+            $services = $this->pipeline->setModel('Service')->get();
 
             View::share('cities', $cities);
             View::share('categories', $categories);
             View::share('brands', $brands);
+            View::share('services', $services);
         }
     }
 
@@ -42,10 +43,9 @@ class ServiceController extends CRUDController
 
         $data = $request->validated();
         
-        $category = $this->pipeline->setModel('Category')->find($request->category_id);
-        $data['for_jobs'] = $category->for_jobs;
-        $data['for_alarm'] = $category->for_alarm;
-        
+        $geo = $this->getGeoLocation($request->geo_url);
+        $data['geo_lat'] = $geo['geo_lat'];
+        $data['geo_lon'] = $geo['geo_lon'];
 
         if ($this->has_files) {
             $this->storeData($request, $data);
@@ -62,19 +62,14 @@ class ServiceController extends CRUDController
         
         $data = $request->validated();
 
-        $category = $this->pipeline->setModel('Category')->find($request->category_id);
-
-        $data['for_jobs'] = $category->for_jobs;
-        $data['for_alarm'] = $category->for_alarm;
+        $geo = $this->getGeoLocation($request->geo_url);
+        $data['geo_lat'] = $geo['geo_lat'];
+        $data['geo_lon'] = $geo['geo_lon'];
 
         $obj = $this->pipeline->setModel($this->model)->findOrFail($id);
 
         if ($this->has_files) {
             $this->updateData($request, $data, $obj);
-        }
-
-        if ($this->has_files) {
-            $this->storeData($request, $data);
         }
         
         $obj->update($data);
@@ -88,6 +83,10 @@ class ServiceController extends CRUDController
             $imageID = resizeImage($request->image, 'uploads', [200, 200]);
             $data['image_id'] = $imageID;
         }
+        if ($request->hasFile('bg_image')) {
+            $imageID = resizeImage($request->bg_image, 'uploads', [300, 200]);
+            $data['bg_image_id'] = $imageID;
+        }
     }
 
     protected function updateData($request, &$data, $item)
@@ -96,6 +95,26 @@ class ServiceController extends CRUDController
             $imageID = resizeImage($request->image, 'uploads', [200, 200]);
             $data['image_id'] = $imageID;
         }
+        if ($request->hasFile('bg_image')) {
+            $imageID = resizeImage($request->bg_image, 'uploads', [300, 200]);
+            $data['bg_image_id'] = $imageID;
+        }
+    }
+
+    private function getGeoLocation($url)
+    {
+        $latitude = 0;
+        $longitude = 0;
+
+        preg_match('/@([0-9.-]+),([0-9.-]+)/', $url, $matches);
+
+        if (count($matches) == 3) {
+            $latitude = $matches[1];
+            $longitude = $matches[2];
+        }
+        return [
+            'geo_lat' => $latitude,
+            'geo_lon' => $longitude
+        ];
     }
 }
-

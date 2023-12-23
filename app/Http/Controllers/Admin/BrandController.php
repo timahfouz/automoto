@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\Categories\CreateRequest;
-use App\Http\Requests\Admin\Categories\UpdateRequest;
+use App\Http\Requests\Admin\Brands\CreateRequest;
+use App\Http\Requests\Admin\Brands\UpdateRequest;
 
-class CategoryController extends CRUDController
+class BrandController extends CRUDController
 {
-    protected $model = 'Category';
-    protected $index_route = 'admin.categories.index';
-    protected $delete_route = 'admin.categories.destroy';
+    protected $model = 'Brand';
+    protected $index_route = 'admin.brands.index';
+    protected $delete_route = 'admin.brands.destroy';
     
-    protected $index_view = 'admin.categories.index';
-    protected $edit_view = 'admin.categories.edit';
-    protected $create_view = 'admin.categories.create';
+    protected $index_view = 'admin.brands.index';
+    protected $edit_view = 'admin.brands.edit';
+    protected $create_view = 'admin.brands.create';
 
     protected $store_request = CreateRequest::class;
     protected $update_request = UpdateRequest::class;
@@ -42,11 +42,7 @@ class CategoryController extends CRUDController
         if ($request->filled('for_alarm')) {
             $data['for_alarm'] = 1;
         }
-        $data['for_brands'] = 0;
-        if ($request->filled('for_brands')) {
-            $data['for_brands'] = 1;
-        }
-        
+
         if ($this->has_files) {
             $this->storeData($request, $data);
         }
@@ -76,11 +72,6 @@ class CategoryController extends CRUDController
         $data['for_alarm'] = 0;
         if ($request->filled('for_alarm')) {
             $data['for_alarm'] = 1;
-        }
-
-        $data['for_brands'] = 0;
-        if ($request->filled('for_brands')) {
-            $data['for_brands'] = 1;
         }
         
         $obj->update($data);

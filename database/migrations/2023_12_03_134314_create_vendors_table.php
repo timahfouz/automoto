@@ -24,11 +24,11 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('image_id')->nullable();
             $table->unsignedBigInteger('bg_image_id')->nullable();
-            $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('service_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('image_id')->references('id')->on('media')->onDelete('set null');
             $table->foreign('bg_image_id')->references('id')->on('media')->onDelete('set null');
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('set null');
             $table->timestamps();
         });
     }

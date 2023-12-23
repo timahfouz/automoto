@@ -25,11 +25,9 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
-            'phone' => 'required|unique:users,phone',
+            'phone' => 'nullable|unique:users,phone',
+            'email' => 'required|unique:users,email',
             'password' => 'required|min:6|confirmed',
-            'governorate_id' => 'required|exists:places,id',
-            'city_id' => 'required|exists:places,id',
-            'area_id' => 'required|exists:places,id',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ];
     }

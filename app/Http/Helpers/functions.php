@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Media;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -55,14 +56,15 @@ if (!function_exists('resizeImage')) {
         $name = time().Str::random(5);
         $fileName = "$dimensions[0]X$dimensions[1]$name.$ext";
 
-        
         $img = Image::make($file->getRealPath());
-
         $img->resize($dimensions[0], $dimensions[1], function ($constraint) {
             $constraint->aspectRatio();
         })->save($destination.'/'.$fileName);
 
-        return "$path/$fileName";
+        $media = Media::create([
+            'path' => "$path/$fileName",
+        ]);
+        return $media->id;
     }
 }
 
@@ -81,13 +83,17 @@ if (!function_exists('imagesSizes')) {
 
 
 
-
 if (!function_exists('getFullImagePath')) {
     function getFullImagePath($model) {
         return $model->image_id ? $model->image->realPath() : null;
     }
 }
 
+if(!function_exists('imagePath')) {
+    function imagePath($image) {
+        return $image ? env('APP_URL').'/'.$image : '';
+    }
+}
 
 if (!function_exists('getUser')) {
     function getUser() {

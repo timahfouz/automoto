@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -9,12 +10,13 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\API\UserResource;
 use App\Http\Requests\API\CreateUserRequest;
 
-class AuthController extends InitController
+class AuthController extends Controller
+// class AuthController extends InitController
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    // }
 
     public function login(Request $request)
     {

@@ -24,13 +24,8 @@ class SettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'facebook' => 'required',
-            'twitter' => 'required',
-            'instagram' => 'required',
-            'website' => 'required',
-            'commission' => 'required|numeric|min:0',
-            'delivery_fees' => 'required|numeric|min:0',
-            'about_us' => 'required',
+            'terms' => 'required',
+            'privacy' => 'required',
         ];
     }
 }

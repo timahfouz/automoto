@@ -25,11 +25,9 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
-            'phone' => 'required|unique:users,phone,'.$this->segment(3),
+            'phone' => 'nullable|unique:users,phone,'.$this->segment(3),
+            'email' => 'required|unique:users,email,'.$this->segment(3),
             'password' => 'nullable|min:6|confirmed',
-            'governorate_id' => 'required|exists:places,id',
-            'city_id' => 'required|exists:places,id',
-            'area_id' => 'required|exists:places,id',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ];
     }

@@ -24,8 +24,8 @@ class SettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'terms' => 'required',
             'privacy' => 'required',
+            'about' => 'required',
         ];
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Users\CreateRequest;
 use App\Http\Requests\Admin\Users\UpdateRequest;
+use App\Pipelines\Criterias\SearchUsersPipeline;
 
 class UserController extends CRUDController
 {
@@ -20,12 +21,21 @@ class UserController extends CRUDController
     protected $update_request = UpdateRequest::class;
     protected $has_files = true;
 
-
-    private $cities, $places, $areas;
-
     public function __construct()
     {
         parent::__construct();
+    }
+    
+
+    public function index(Request $request)
+    {
+        $items = $this->pipeline->setModel($this->model)
+            ->pushPipeline([new SearchUsersPipeline($request)])
+            ->get();
+        
+        $delte_route = $this->delete_route ?? null;
+        
+        return view($this->index_view, compact('items','delte_route'));
     }
 
     public function update($id)

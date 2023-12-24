@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\Admin\Vendors\CreateRequest;
 use App\Http\Requests\Admin\Vendors\UpdateRequest;
+use App\Pipelines\Criterias\SearchVendorsPipeline;
+use Illuminate\Http\Request;
 
 class VendorController extends CRUDController
 {
@@ -37,6 +39,17 @@ class VendorController extends CRUDController
         }
     }
 
+    public function index(Request $request)
+    {
+        $items = $this->pipeline->setModel($this->model)
+            ->pushPipeline([new SearchVendorsPipeline($request)])
+            ->get();
+        
+        $delte_route = $this->delete_route ?? null;
+        
+        return view($this->index_view, compact('items','delte_route'));
+    }
+    
     public function store()
     {
         $request = app($this->store_request);
@@ -46,6 +59,15 @@ class VendorController extends CRUDController
         $geo = $this->getGeoLocation($request->geo_url);
         $data['geo_lat'] = $geo['geo_lat'];
         $data['geo_lon'] = $geo['geo_lon'];
+
+        $data['is_new_job'] = 0;
+        if ($request->filled('is_new_job')) {
+            $data['is_new_job'] = 1;
+        }
+        $data['is_driver'] = 0;
+        if ($request->filled('is_driver')) {
+            $data['is_driver'] = 1;
+        }
 
         if ($this->has_files) {
             $this->storeData($request, $data);
@@ -66,6 +88,15 @@ class VendorController extends CRUDController
         $data['geo_lat'] = $geo['geo_lat'];
         $data['geo_lon'] = $geo['geo_lon'];
 
+        $data['is_new_job'] = 0;
+        if ($request->filled('is_new_job')) {
+            $data['is_new_job'] = 1;
+        }
+        $data['is_driver'] = 0;
+        if ($request->filled('is_driver')) {
+            $data['is_driver'] = 1;
+        }
+        
         $obj = $this->pipeline->setModel($this->model)->findOrFail($id);
 
         if ($this->has_files) {

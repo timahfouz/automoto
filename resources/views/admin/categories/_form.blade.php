@@ -26,9 +26,4 @@
         name="for_jobs" {{ (isset($item) && $item->for_jobs ? 'checked' : '') }}>
 </div>
 
-<div class="form-group mb-4 col-md-2">
-    <label for="for_alarm">Alert Category</label>
-    <input type="checkbox" class="" id="for_alarm"
-        name="for_alarm" {{ (isset($item) && $item->for_alarm ? 'checked' : '') }}>
-</div>
 

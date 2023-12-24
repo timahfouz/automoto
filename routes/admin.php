@@ -40,8 +40,11 @@ Route::group(['middleware' => ['auth:admin'], 'namespace' => 'Admin', 'as' => 'a
     Route::resource('vendors', 'VendorController');
 
     Route::get('settings', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);
-
     Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
+
+    Route::get('messages', ['as' => 'messages.index', 'uses' => 'InboxController@index']);
+    Route::delete('messages/{id}', ['as' => 'messages.destroy', 'uses' => 'InboxController@destroy']);
+
 
     Route::post('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 });

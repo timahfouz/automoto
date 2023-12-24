@@ -95,6 +95,22 @@
 
 </div>
 
+<label for="brand_id">Select type if it's a job service:</label>
+<div class="row">
+    <div class="form-group mb-4 col-md-2">
+        <input type="radio" class="" id="is_new_job"
+        name="service_type" value="is_new_job" {{ (isset($item) && $item->is_new_job ? 'checked' : '') }}>
+        <label for="is_new_job">New Job</label>
+    </div>
+
+    <div class="form-group mb-4 col-md-2">
+        <input type="radio" class="" id="is_driver"
+        name="service_type" value="is_driver" {{ (isset($item) && $item->is_driver ? 'checked' : '') }}>
+        <label for="is_driver">Is a driver</label>
+    </div>
+</div>
+
+
 <!-- 
 <div class="form-group mb-4 col-md-2">
     <label for="for_jobs">Job Service</label>

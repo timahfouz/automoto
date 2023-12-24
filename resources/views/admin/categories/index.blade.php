@@ -7,7 +7,7 @@
 
     <div class="statbox widget box box-shadow" >
         <div class="widget-header" >
-            <div class="row">
+            <div class="row" style="padding: 24px;">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4> Categories List
 
@@ -25,9 +25,9 @@
                     <thead>
                     <tr>
                         <th class="">Name</th>
+                        <th class="">Default Category</th>
                         <th class="">Brands Category</th>
                         <th class="">Job Category</th>
-                        <th class="">Alert Category</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -39,13 +39,13 @@
                                 {{ $item->name }}
                             </td>
                             <td class="checkbox-column">
+                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ (!$item->for_brands && !$item->for_jobs) ? 'up' : 'down' }} text-{{ (!$item->for_brands && !$item->for_jobs) ? 'primary' : 'danger' }}"></span>
+                            </td>
+                            <td class="checkbox-column">
                                 <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_brands ? 'up' : 'down' }} text-{{ $item->for_brands ? 'primary' : 'danger' }}"></span>
                             </td>
                             <td class="checkbox-column">
                                 <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_jobs ? 'up' : 'down' }} text-{{ $item->for_jobs ? 'primary' : 'danger' }}"></span>
-                            </td>
-                            <td class="checkbox-column">
-                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_alarm ? 'up' : 'down' }} text-{{ $item->for_alarm ? 'primary' : 'danger' }}"></span>
                             </td>
 
                             <td class="text-center">

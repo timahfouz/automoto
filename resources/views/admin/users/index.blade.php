@@ -7,11 +7,21 @@
 
     <div class="statbox widget box box-shadow" >
         <div class="widget-header" >
-            <div class="row">
+            <div class="row" style="padding: 24px;">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>  Users List
+                    <div class="float-lg-left" style="display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        gap: 24px;
+                        width: 80%;"
+                    >
+                        <h4>  Users List </h4>
+                        <form action="" style="width: 25%;">
+                            <input type="text" class="form-control" name="keyword" placeholder="Search by name, phone, email" value="{{ request()->get('keyword') }}">
 
-                    </h4>
+                        </form>
+                    </div>
+                    
                     <div class="float-lg-right">
                         <a class="btn btn-primary" href="{{ route('admin.users.create') }}">Add User</a>
                     </div>

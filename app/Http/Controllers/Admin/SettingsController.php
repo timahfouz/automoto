@@ -19,14 +19,14 @@ class SettingsController extends Controller
 
     public function index(Request $request)
     {
-        $data = array_flip($this->pipeline->pluck('key','value')->toArray());
+        $data = collect($this->pipeline->get());
         
-        $privacy = $data['privacy-policy'] ?? '';
-        $terms = $data['terms'] ?? '';
+        $privacy = $data->where('key','privacy')->first()->value ?? '';
+        $about = $data->where('key','about')->first()->value ?? '';
 
         return view('admin.settings.index')->with([
             'privacy' => $privacy,
-            'terms'=> $terms,
+            'about'=> $about,
         ]);
     }
     
@@ -36,15 +36,17 @@ class SettingsController extends Controller
         \DB::beginTransaction();
         try {
             $this->pipeline->delete();
+            
             foreach($request->except('_token') as $key => $value) {
-                if ($key == 'privacy') $key = 'privacy-policy';
                 $data[] = [
                     'key' => $key,
                     'value' => $value,
+                    'type' => 'data',
                 ];
             }
-
+            
             $this->pipeline->insert($data);
+
             \DB::commit();
         } catch(\Exception $ex) {
             dd($ex->getMessage());

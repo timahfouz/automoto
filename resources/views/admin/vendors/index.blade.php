@@ -7,11 +7,21 @@
 
     <div class="statbox widget box box-shadow" >
         <div class="widget-header" >
-            <div class="row">
+            <div class="row" style="padding: 24px;">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4> Vendors List
+                    <div class="float-lg-left" style="display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        gap: 24px;
+                        width: 80%;"
+                    >
+                        <h4>  Vendors List </h4>
+                        <form action="" style="width: 30%;">
+                            <input type="text" class="form-control" name="keyword" placeholder="Search by name, bio, phone, whatsapp" value="{{ request()->get('keyword') }}">
 
-                    </h4>
+                        </form>
+                    </div>
+                    
                     <div class="float-lg-right">
                         <a class="btn btn-primary" href="{{ route('admin.vendors.create') }}">Add new vendor</a>
                     </div>
@@ -30,6 +40,8 @@
                         <th class="">Category</th>
                         <th class="">Brand</th>
                         <th class="">Service</th>
+                        <th class="">New Job</th>
+                        <th class="">Driver</th>
                         <th class="">Location</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -55,6 +67,12 @@
                             </td>
                             <td class="checkbox-column">
                                 {{ $item->service->name ?? '---' }}
+                            </td>
+                            <td class="checkbox-column">
+                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->is_new_job ? 'up' : 'down' }} text-{{ $item->is_new_job ? 'primary' : 'danger' }}"></span>
+                            </td>
+                            <td class="checkbox-column">
+                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->is_driver ? 'up' : 'down' }} text-{{ $item->is_driver ? 'primary' : 'danger' }}"></span>
                             </td>
                             <td class="checkbox-column">
                                 <a href="{{ $item->geo_url }}">Click here</a>

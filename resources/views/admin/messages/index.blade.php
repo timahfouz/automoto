@@ -7,7 +7,7 @@
 
     <div class="statbox widget box box-shadow" >
         <div class="widget-header" >
-            <div class="row">
+            <div class="row" style="padding: 24px;">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4> الرسائل الواردة
 
@@ -22,7 +22,7 @@
                     <thead>
                     <tr>
                         <th class="">Name</th>
-                        <th class="">Phone</th>
+                        <th class="">Email</th>
                         <th class="">Message</th>
                         <th class="">Time</th>
                         <th class="text-center">Action</th>
@@ -35,7 +35,7 @@
                                 <b>{{ $item->name }}</b>
                             </td>
                             <td class="checkbox-column">
-                                <b>{{ $item->phone }}</b>
+                                <b>{{ $item->email }}</b>
                             </td>
                             <td class="checkbox-column">
                                 <b style="font-size: 14px;">{{ $item->message }}</b>

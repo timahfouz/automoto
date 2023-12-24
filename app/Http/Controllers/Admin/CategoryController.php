@@ -38,10 +38,7 @@ class CategoryController extends CRUDController
         if ($request->filled('for_jobs')) {
             $data['for_jobs'] = 1;
         }
-        $data['for_alarm'] = 0;
-        if ($request->filled('for_alarm')) {
-            $data['for_alarm'] = 1;
-        }
+        
         $data['for_brands'] = 0;
         if ($request->filled('for_brands')) {
             $data['for_brands'] = 1;
@@ -71,11 +68,6 @@ class CategoryController extends CRUDController
         $data['for_jobs'] = 0;
         if ($request->filled('for_jobs')) {
             $data['for_jobs'] = 1;
-        }
-
-        $data['for_alarm'] = 0;
-        if ($request->filled('for_alarm')) {
-            $data['for_alarm'] = 1;
         }
 
         $data['for_brands'] = 0;

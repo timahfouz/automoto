@@ -7,7 +7,7 @@
 
     <div class="statbox widget box box-shadow" >
         <div class="widget-header" >
-            <div class="row">
+            <div class="row" style="padding: 24px;">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4> Admins
 

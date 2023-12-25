@@ -60,14 +60,10 @@ class VendorController extends CRUDController
         $data['geo_lat'] = $geo['geo_lat'];
         $data['geo_lon'] = $geo['geo_lon'];
 
-        $data['is_new_job'] = 0;
-        if ($request->filled('is_new_job')) {
-            $data['is_new_job'] = 1;
-        }
-        $data['is_driver'] = 0;
-        if ($request->filled('is_driver')) {
-            $data['is_driver'] = 1;
-        }
+        $type = $data['service_type'];
+        $data['is_new_job'] = $type == 'is_new_job';
+        $data['is_driver'] = $type == 'is_driver';
+        unset($data['service_type']);
 
         if ($this->has_files) {
             $this->storeData($request, $data);
@@ -88,15 +84,12 @@ class VendorController extends CRUDController
         $data['geo_lat'] = $geo['geo_lat'];
         $data['geo_lon'] = $geo['geo_lon'];
 
-        $data['is_new_job'] = 0;
-        if ($request->filled('is_new_job')) {
-            $data['is_new_job'] = 1;
-        }
-        $data['is_driver'] = 0;
-        if ($request->filled('is_driver')) {
-            $data['is_driver'] = 1;
-        }
+        $type = $data['service_type'];
+        $data['is_new_job'] = $type == 'is_new_job';
+        $data['is_driver'] = $type == 'is_driver';
         
+        unset($data['service_type']);
+
         $obj = $this->pipeline->setModel($this->model)->findOrFail($id);
 
         if ($this->has_files) {

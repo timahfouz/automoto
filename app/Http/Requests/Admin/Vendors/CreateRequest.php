@@ -33,6 +33,7 @@ class CreateRequest extends FormRequest
             'bio' => 'nullable',
             'geo_url' => 'nullable|min:50',
             'whatsapp' => 'nullable|min:11',
+            'service_type' => 'nullable|in:is_new_job,is_driver',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',
             'bg_image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ];

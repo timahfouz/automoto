@@ -23,7 +23,7 @@
 <div class="row">
     <div class="form-group mb-4 col-md-8">
         <label for="geo_url"> Location from google map: <a style="color: blue;border-bottom: 1px dashed blue;" target="_blank" href="https://maps.google.com">Google maps</a></label>
-        <input type="text" required class="form-control @error('geo_url') is-invalid @enderror" id="geo_url"
+        <input type="text" class="form-control @error('geo_url') is-invalid @enderror" id="geo_url"
                 name="geo_url" placeholder="Location from google map" value="{{old('geo_url', (isset($item) ? $item->geo_url : ''))}}">
     </div>
 </div>
@@ -31,12 +31,12 @@
 <div class="row">
     <div class="form-group mb-4 col-md-4">
         <label for="name"> Vendor Phone:</label>
-        <input type="text" required class="form-control @error('phone') is-invalid @enderror" id="phone"
+        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
                 name="phone" placeholder="Phone" value="{{old('phone', (isset($item) ? $item->phone : ''))}}">
     </div>
     <div class="form-group mb-4 col-md-4">
         <label for="name"> Vendor Whatsapp:</label>
-        <input type="text" required class="form-control @error('whatsapp') is-invalid @enderror" id="whatsapp"
+        <input type="text" class="form-control @error('whatsapp') is-invalid @enderror" id="whatsapp"
                 name="whatsapp" placeholder="Whatsapp" value="{{old('whatsapp', (isset($item) ? $item->whatsapp : ''))}}">
     </div>
 </div>
@@ -44,7 +44,7 @@
 <div class="row">
     <div class="form-group mb-4 col-md-8">
         <label for="geo_url">Bio:</label>
-        <textarea rows="10" required class="form-control @error('bio') is-invalid @enderror" id="bio"
+        <textarea rows="10" class="form-control @error('bio') is-invalid @enderror" id="bio"
                 name="bio" placeholder="Type something about this vendor" >{{old('bio', (isset($item) ? $item->bio : ''))}}</textarea>
     </div>
 </div>
@@ -53,7 +53,7 @@
 <div class="row">
     <div class="form-group mb-4 col-md-4">
         <label for="city_id"> Select City:</label>
-        <select required class="form-control" id="city_id" name="city_id">
+        <select class="form-control" id="city_id" name="city_id">
             @foreach($cities as $city)
             <option {{(isset($item) ? ($item->city_id == $city->id) ? 'selected' : '' : '')}} value="{{ $city->id }}">{{ $city->name }}</option>
             @endforeach
@@ -98,15 +98,11 @@
 <label for="brand_id">Select type if it's a job service:</label>
 <div class="row">
     <div class="form-group mb-4 col-md-2">
-        <input type="radio" class="" id="is_new_job"
-        name="service_type" value="is_new_job" {{ (isset($item) && $item->is_new_job ? 'checked' : '') }}>
-        <label for="is_new_job">New Job</label>
-    </div>
-
-    <div class="form-group mb-4 col-md-2">
-        <input type="radio" class="" id="is_driver"
-        name="service_type" value="is_driver" {{ (isset($item) && $item->is_driver ? 'checked' : '') }}>
-        <label for="is_driver">Is a driver</label>
+        <select class="form-control" id="brand_id" name="service_type">
+            <option value="">Select Type</option>
+            <option {{(isset($item) ? ($item->is_driver == 1) ? 'selected' : '' : '')}} value="is_driver">Is a driver</option>
+            <option {{(isset($item) ? ($item->is_new_job == 1) ? 'selected' : '' : '')}} value="is_new_job">New Job</option>
+        </select>
     </div>
 </div>
 

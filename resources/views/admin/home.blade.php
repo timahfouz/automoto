@@ -11,7 +11,7 @@
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
             <div class="widget widget-one_hybrid widget-referral" style="background: #ffdd92">
                 <div class="widget-heading">
-                    <a href="">
+                    <a href="{{ route('admin.admins.index') }}">
                         <div class="w-title d-flex justify-content-evenly">
                             <div class="w-icon" style="background:#ffdd92;  color:#1b55e2; border: 1px solid #1b55e2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -34,7 +34,7 @@
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
             <div class="widget widget-one_hybrid widget-referral" style="background:#f1f2f3">
                 <div class="widget-heading">
-                    <a href="">
+                    <a href="{{ route('admin.users.index') }}">
                         <div class="w-title d-flex justify-content-evenly">
                             <div class="w-icon" style=" background:#f1f2f3;color:#1b55e2; border: 1px solid #1b55e2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -59,7 +59,7 @@
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
             <div class="widget widget-one_hybrid widget-referral" style="background:#ffc6c6; color: #000">
                 <div class="widget-heading">
-                    <a href="">
+                    <a href="{{ route('admin.brands.index') }}">
                         <div class="w-title d-flex justify-content-evenly">
                             <div class="w-icon" style="background:#ffc6c6; border: 1px solid #d70606">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -85,7 +85,7 @@
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing">
             <div class="widget widget-one_hybrid widget-referral" style="background:#c3ff45; color: #000">
                 <div class="widget-heading">
-                    <a href="">
+                    <a href="{{ route('admin.services.index') }}">
                         <div class="w-title d-flex justify-content-evenly">
                             <div class="w-icon" style="background:#c3ff45; border: 1px solid brown">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

@@ -23,19 +23,37 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|min:2',
             'city_id' => 'required|exists:cities,id',
+            'area_id' => 'required|exists:cities,id',
             'category_id' => 'required|exists:categories,id',
-            'brand_id' => 'nullable|exists:brands,id',
-            'service_id' => 'nullable|exists:services,id',
+            'brands' => 'nullable|array',
+            'services' => 'nullable|array',
             'phone' => 'nullable|min:11',
             'bio' => 'nullable',
+            'start_time' => 'required',
+            'end_time' => 'required|after:start_time',
             'geo_url' => 'nullable|min:50',
             'whatsapp' => 'nullable|min:11',
             'service_type' => 'nullable|in:is_new_job,is_driver',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',
             'bg_image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ];
+
+        if (request()->filled('brands') && is_array(request()->get('brands'))) {
+            foreach(request()->get('brands') as $key => $value) {
+                if ($key != -1) {
+                    $rules["brands.$key"] = 'required|exists:brands,id';
+                }
+            }
+        }
+        if (request()->filled('services') && is_array(request()->get('services'))) {
+            foreach(request()->get('services') as $key => $value) {
+                $rules["services.$key"] = 'required|exists:services,id';
+            }
+        }
+
+        return $rules;
     }
 }

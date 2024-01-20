@@ -1,3 +1,6 @@
+<x-admin.error-feedback />
+
+
 <div class="row">
     <div class="form-group mb-4 col-md-4">
         <label for="name"> Choose Image: </label>
@@ -61,6 +64,19 @@
     </div>
 
     <div class="form-group mb-4 col-md-4">
+        <label for="area_id"> Select Area:</label>
+        <select class="form-control" id="area_id" name="area_id">
+            @foreach($areas as $area)
+            <option {{(isset($item) ? ($item->area_id == $area->id) ? 'selected' : '' : '')}} value="{{ $area->id }}">{{ $area->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="form-group mb-4 col-md-8">
         <label for="category_id"> Select Category:</label>
         <select required class="form-control" id="category_id" name="category_id">
             @foreach($categories as $category)
@@ -68,34 +84,46 @@
             @endforeach
         </select>
     </div>
-    
+
+</div>
+
+<div class="row">
+    <div class="form-group mb-4 col-md-4">
+        <label for="start_time"> Select start time:</label>
+        <input type="time" name="start_time" id="start_time" class="form-control" value="{{old('start_time', (isset($item) ? $item->start_time : ''))}}">
+    </div>
+
+    <div class="form-group mb-4 col-md-4">
+        <label for="end_time"> Select end time:</label>
+        <input type="time" name="end_time" id="end_time" class="form-control" value="{{old('end_time', (isset($item) ? $item->end_time : ''))}}">
+    </div>
+
 </div>
 
 <div class="row">
 
     <div class="form-group mb-4 col-md-4">
-        <label for="brand_id"> Select Brand (optional):</label>
-        <select class="form-control" id="brand_id" name="brand_id">
-            <option value="">Select Brand</option>
+        <label for="brand_id"> Select Brands (optional):</label>
+        <select multiple class="form-control" id="brand_id" name="brands[]">
+            <option value="-1">All Brands</option>
             @foreach($brands as $brand)
-            <option {{(isset($item) ? ($item->brand_id == $brand->id) ? 'selected' : '' : '')}} value="{{ $brand->id }}">{{ $brand->name }}</option>
+            <option {{(isset($item) ? in_array($brand->id, $item->brands()->pluck('brand_id')->toArray()) ? 'selected' : '' : '')}} value="{{ $brand->id }}">{{ $brand->name }}</option>
             @endforeach
         </select>
     </div>
 
     <div class="form-group mb-4 col-md-4">
-        <label for="brand_id"> Select Service (optional):</label>
-        <select class="form-control" id="brand_id" name="brand_id">
-            <option value="">Select Service</option>
+        <label for="servic_id"> Select Services (optional):</label>
+        <select multiple class="form-control" id="servic_id" name="services[]">
             @foreach($services as $service)
-            <option {{(isset($item) ? ($item->service_id == $service->id) ? 'selected' : '' : '')}} value="{{ $service->id }}">{{ $service->name }}</option>
+            <option {{(isset($item) ? in_array($service->id, $item->services()->pluck('service_id')->toArray()) ? 'selected' : '' : '')}} value="{{ $service->id }}">{{ $service->name }}</option>
             @endforeach
         </select>
     </div>
 
 </div>
 
-<label for="brand_id">Select type if it's a job service:</label>
+{{-- <label for="brand_id">Select type if it's a job service:</label>
 <div class="row">
     <div class="form-group mb-4 col-md-2">
         <select class="form-control" id="brand_id" name="service_type">
@@ -104,7 +132,7 @@
             <option {{(isset($item) ? ($item->is_new_job == 1) ? 'selected' : '' : '')}} value="is_new_job">New Job</option>
         </select>
     </div>
-</div>
+</div> --}}
 
 
 <!-- 

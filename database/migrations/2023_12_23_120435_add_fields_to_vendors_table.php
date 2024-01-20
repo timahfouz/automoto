@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::table('vendors', function (Blueprint $table) {
             $table->unsignedBigInteger('city_id')->after('bio');
-            $table->unsignedBigInteger('brand_id')->nullable()->after('city_id');
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
+            $table->unsignedBigInteger('area_id')->nullable()->after('city_id');
             $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreign('area_id')->references('id')->on('cities')->onDelete('set null');
         });
     }
 
@@ -31,6 +31,7 @@ return new class extends Migration
         Schema::table('vendors', function (Blueprint $table) {
             $table->dropColumn('city_id');
             $table->dropColumn('brand_id');
+            $table->dropColumn('area_id');
         });
     }
 };

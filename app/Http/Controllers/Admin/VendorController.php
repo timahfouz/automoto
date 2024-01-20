@@ -28,11 +28,13 @@ class VendorController extends CRUDController
         parent::__construct();
         if(in_array(\Request::route()->getName(), ["admin.vendors.create","admin.vendors.edit"])) {
             $cities = $this->pipeline->setModel('City')->whereNull('parent_id')->get();
+            $areas = $this->pipeline->setModel('City')->whereNotNull('parent_id')->get();
             $categories = $this->pipeline->setModel('Category')->get();
             $brands = $this->pipeline->setModel('Brand')->get();
             $services = $this->pipeline->setModel('Service')->get();
 
             View::share('cities', $cities);
+            View::share('areas', $areas);
             View::share('categories', $categories);
             View::share('brands', $brands);
             View::share('services', $services);
@@ -60,7 +62,7 @@ class VendorController extends CRUDController
         $data['geo_lat'] = $geo['geo_lat'];
         $data['geo_lon'] = $geo['geo_lon'];
 
-        $type = $data['service_type'];
+        $type = $data['service_type'] ?? null;
         $data['is_new_job'] = $type == 'is_new_job';
         $data['is_driver'] = $type == 'is_driver';
         unset($data['service_type']);
@@ -69,7 +71,15 @@ class VendorController extends CRUDController
             $this->storeData($request, $data);
         }
 
-        $this->pipeline->setModel($this->model)->create($data);
+        $vendor = $this->pipeline->setModel($this->model)->create($data);
+
+        $allBrands = false;
+        if (in_array(-1, $request->brands)) {
+            $allBrands = true;
+        }
+        
+        $this->saveBrands($vendor, $request->brands ?? [], $allBrands);
+        $this->saveServices($vendor, $request->services ?? []);
 
         return redirect()->route($this->index_route)->with(['success' => 'Greeting']);
     }
@@ -84,19 +94,22 @@ class VendorController extends CRUDController
         $data['geo_lat'] = $geo['geo_lat'];
         $data['geo_lon'] = $geo['geo_lon'];
 
-        $type = $data['service_type'];
+        $type = $data['service_type'] ?? null;
         $data['is_new_job'] = $type == 'is_new_job';
         $data['is_driver'] = $type == 'is_driver';
         
         unset($data['service_type']);
 
-        $obj = $this->pipeline->setModel($this->model)->findOrFail($id);
+        $vendor = $this->pipeline->setModel($this->model)->findOrFail($id);
 
         if ($this->has_files) {
-            $this->updateData($request, $data, $obj);
+            $this->updateData($request, $data, $vendor);
         }
         
-        $obj->update($data);
+        $vendor->update($data);
+
+        $this->saveBrands($vendor, $request->brands ?? []);
+        $this->saveServices($vendor, $request->services ?? []);
 
         return redirect()->route($this->index_route);
     }
@@ -140,5 +153,26 @@ class VendorController extends CRUDController
             'geo_lat' => $latitude,
             'geo_lon' => $longitude
         ];
+    }
+
+    private function saveBrands($vendor, $brands, $allBrands = false)
+    {
+        if ($allBrands) {
+            $brands = $this->pipeline->setModel('Brand')->pluck('id')->toArray();
+        }
+        
+        $brandData = [];
+        foreach($brands as $brand) {
+            $brandData[] = ['brand_id' => $brand];
+        };
+        $vendor->brands()->createMany($brandData);
+    }
+    private function saveServices($vendor, $services)
+    {
+        $serviceData = [];
+        foreach($services as $service) {
+            $serviceData[] = ['service_id' => $service];
+        };
+        $vendor->services()->createMany($serviceData);
     }
 }

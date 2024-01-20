@@ -37,9 +37,10 @@
                         <th class="">ID</th>
                         <th class="">Name</th>
                         <th class="">City</th>
+                        <th class="">Area</th>
                         <th class="">Category</th>
-                        <th class="">Brand</th>
-                        <th class="">Service</th>
+                        <th class="">Start time</th>
+                        <th class="">End time</th>
                         <th class="">New Job</th>
                         <th class="">Driver</th>
                         <th class="">Location</th>
@@ -57,16 +58,19 @@
                                 {{ $item->name }}
                             </td>
                             <td class="checkbox-column">
-                                {{ $item->city->name }}
+                                {{ $item->city->name ?? '---' }}
                             </td>
                             <td class="checkbox-column">
-                                {{ $item->category->name }}
+                                {{ $item->area->name ?? '---' }}
                             </td>
                             <td class="checkbox-column">
-                                {{ $item->brand->name ?? '---' }}
+                                {{ $item->category->name ?? '---' }}
                             </td>
                             <td class="checkbox-column">
-                                {{ $item->service->name ?? '---' }}
+                                {{ date('h:i a', strtotime($item->start_time)) }}
+                            </td>
+                            <td class="checkbox-column">
+                                {{ date('h:i a', strtotime($item->end_time)) }}
                             </td>
                             <td class="checkbox-column">
                                 <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->is_new_job ? 'up' : 'down' }} text-{{ $item->is_new_job ? 'primary' : 'danger' }}"></span>
@@ -75,7 +79,7 @@
                                 <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->is_driver ? 'up' : 'down' }} text-{{ $item->is_driver ? 'primary' : 'danger' }}"></span>
                             </td>
                             <td class="checkbox-column">
-                                <a href="{{ $item->geo_url }}">Click here</a>
+                                <a target="_blank" href="{{ $item->geo_url }}">Click here</a>
                             </td>
 
                             <td class="text-center">

@@ -11,6 +11,10 @@ class Vendor extends Model
     // name	geo_lat	geo_lon	phone	whatsapp	bio	category_id	image_id	bg_image_id	service_id	
 
     protected $guarded = ['id'];
+    // protected $casts = [
+    //     'start_time' => 'datetime',
+    //     'end_time' => 'datetime',
+    // ];
 
     public function image()
     {
@@ -26,14 +30,37 @@ class Vendor extends Model
     {
         return $this->belongsTo(City::class, 'city_id')->withDefault();
     }
-    
-    public function service()
+
+    public function area()
     {
-        return $this->belongsTo(Service::class, 'service_id')->withDefault();
+        return $this->belongsTo(City::class, 'area_id')->withDefault();
+    }
+    
+    public function services()
+    {
+        return $this->hasMany(VendorService::class, 'vendor_id');
+    }
+    public function brands()
+    {
+        return $this->hasMany(VendorBrand::class, 'vendor_id');
     }
 
-    public function brand()
+
+    public function getServices()
     {
-        return $this->belongsTo(Brand::class, 'brand_id')->withDefault();
+        return $this->belongsToMany(Service::class, VendorService::class, 'vendor_id', 'service_id');
     }
+    public function getBrands()
+    {
+        return $this->belongsToMany(Brand::class, VendorBrand::class, 'vendor_id', 'brand_id');
+    }
+
+
+    protected static function boot() {
+		parent::boot();
+		static::deleting(function($model) {
+			$model->services()->delete();
+			$model->brands()->delete();
+		});
+	}
 }

@@ -36,4 +36,11 @@ class AreaController extends CRUDController
         
         return view($this->index_view, compact('items','delte_route'));
     }
+
+
+    public function getJsonAreasByCity($id)
+    {
+        $areas = $this->pipeline->setModel($this->model)->where('parent_id', $id)->get();
+        return jsonResponse($areas);
+    }
 }

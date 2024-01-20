@@ -56,7 +56,7 @@
 <div class="row">
     <div class="form-group mb-4 col-md-4">
         <label for="city_id"> Select City:</label>
-        <select class="form-control" id="city_id" name="city_id">
+        <select onChange='getAreas()' class="form-control" id="city_id" name="city_id">
             @foreach($cities as $city)
             <option {{(isset($item) ? ($item->city_id == $city->id) ? 'selected' : '' : '')}} value="{{ $city->id }}">{{ $city->name }}</option>
             @endforeach
@@ -148,3 +148,43 @@
     <input type="checkbox" class="" id="for_alarm"
         name="for_alarm" {{ (isset($item) && $item->for_alarm ? 'checked' : '') }}>
 </div> -->
+
+
+
+
+@push('scripts')
+<script>
+    function getAreas() {
+        var city = document.getElementById("city_id");
+        var area = document.getElementById("area_id");
+
+        var cityID = city.value;
+
+        var url = '{{ route('admin.city.areas', ['id' => ':id']) }}'.replace(':id', cityID);
+
+        fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            
+            let areas = data.data;
+
+            area.innerHTML = '';
+
+            areas.forEach((item) => {
+                var option = document.createElement('option');
+                option.value = item.id;
+                option.text = item.name;
+                area.add(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+@endpush

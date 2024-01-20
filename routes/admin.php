@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth:admin'], 'namespace' => 'Admin', 'as' => 'a
     Route::resource('cities', 'CityController');
 
     Route::resource('areas', 'AreaController');
+
+    Route::GET('areas-by-city/{id}', ['as' => 'city.areas', 'uses' => 'AreaController@getJsonAreasByCity']);
     
     Route::resource('categories', 'CategoryController');
 

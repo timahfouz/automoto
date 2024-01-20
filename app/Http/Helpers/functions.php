@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 if (!function_exists('jsonResponse')) {
-    function jsonResponse($code = 200, $message = 'done', $data = []) {
+    function jsonResponse($data = [], $code = 200, $message = 'done') {
         $code = getCode($code);
         return response()->json([
             'status_code' => $code,

@@ -108,7 +108,12 @@ class VendorController extends CRUDController
         
         $vendor->update($data);
 
-        $this->saveBrands($vendor, $request->brands ?? []);
+        $allBrands = false;
+        if (in_array(-1, $request->brands)) {
+            $allBrands = true;
+        }
+        
+        $this->saveBrands($vendor, $request->brands ?? [], $allBrands);
         $this->saveServices($vendor, $request->services ?? []);
 
         return redirect()->route($this->index_route);

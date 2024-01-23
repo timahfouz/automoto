@@ -108,13 +108,20 @@ class VendorController extends CRUDController
         
         $vendor->update($data);
 
-        $allBrands = false;
+        $allBrands = $deleteBrands = $deleteServices = false;
+
         if (in_array(-1, $request->brands)) {
             $allBrands = true;
         }
+        if (in_array(null, $request->brands)) {
+            $deleteBrands = true;
+        }
+        if (in_array(null, $request->services)) {
+            $deleteServices = true;
+        }
         
-        $this->saveBrands($vendor, $request->brands ?? [], $allBrands);
-        $this->saveServices($vendor, $request->services ?? []);
+        $this->saveBrands($vendor, $request->brands ?? [], $allBrands, $deleteBrands);
+        $this->saveServices($vendor, $request->services ?? [], $deleteServices);
 
         return redirect()->route($this->index_route);
     }
@@ -160,8 +167,14 @@ class VendorController extends CRUDController
         ];
     }
 
-    private function saveBrands($vendor, $brands, $allBrands = false)
+    private function saveBrands($vendor, $brands, $allBrands = false, $deleteBrands = false)
     {
+        $this->pipeline->setModel('VendorBrand')->where(['vendor_id' => $vendor->id])->delete();
+
+        if ($deleteBrands) {
+            return;
+        }
+        
         if ($allBrands) {
             $brands = $this->pipeline->setModel('Brand')->pluck('id')->toArray();
         }
@@ -172,8 +185,14 @@ class VendorController extends CRUDController
         };
         $vendor->brands()->createMany($brandData);
     }
-    private function saveServices($vendor, $services)
+    private function saveServices($vendor, $services, $deleteServices = false)
     {
+        $this->pipeline->setModel('VendorService')->where(['vendor_id' => $vendor->id])->delete();
+        
+        if ($deleteServices) {
+            return;
+        }
+
         $serviceData = [];
         foreach($services as $service) {
             $serviceData[] = ['service_id' => $service];

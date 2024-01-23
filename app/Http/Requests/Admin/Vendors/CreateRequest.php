@@ -41,7 +41,7 @@ class CreateRequest extends FormRequest
             'bg_image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ];
         
-        if (!in_array(-1, request()->get('brands'))) {
+        if (!in_array(-1, request()->get('brands')) || !in_array(null, request()->get('brands'))) {
             if (request()->filled('brands') && is_array(request()->get('brands'))) {
                 foreach(request()->get('brands') as $key => $value) {
                     $rules["brands.$key"] = 'required|exists:brands,id';
@@ -49,11 +49,14 @@ class CreateRequest extends FormRequest
             }
         }
         
-        if (request()->filled('services') && is_array(request()->get('services'))) {
-            foreach(request()->get('services') as $key => $value) {
-                $rules["services.$key"] = 'required|exists:services,id';
+        if (!in_array(null, request()->get('services'))) { 
+            if (request()->filled('services') && is_array(request()->get('services'))) {
+                foreach(request()->get('services') as $key => $value) {
+                    $rules["services.$key"] = 'required|exists:services,id';
+                }
             }
         }
+        
         
         return $rules;
     }

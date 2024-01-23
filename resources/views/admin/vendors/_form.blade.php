@@ -105,6 +105,7 @@
     <div class="form-group mb-4 col-md-4">
         <label for="brand_id"> Select Brands (optional):</label>
         <select multiple class="form-control" id="brand_id" name="brands[]">
+            <option value="">Select Brands</option>
             <option value="-1">All Brands</option>
             @foreach($brands as $brand)
             <option {{(isset($item) ? in_array($brand->id, $item->brands()->pluck('brand_id')->toArray()) ? 'selected' : '' : '')}} value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -115,6 +116,7 @@
     <div class="form-group mb-4 col-md-4">
         <label for="servic_id"> Select Services (optional):</label>
         <select multiple class="form-control" id="servic_id" name="services[]">
+            <option value="">Select Services</option>
             @foreach($services as $service)
             <option {{(isset($item) ? in_array($service->id, $item->services()->pluck('service_id')->toArray()) ? 'selected' : '' : '')}} value="{{ $service->id }}">{{ $service->name }}</option>
             @endforeach

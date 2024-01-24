@@ -34,7 +34,7 @@ class CreateRequest extends FormRequest
             'bio' => 'nullable',
             'start_time' => 'required',
             'end_time' => 'required|after:start_time',
-            'geo_url' => 'nullable|min:50',
+            'geo_url' => 'nullable|min:20',
             'whatsapp' => 'nullable|min:11',
             'service_type' => 'nullable|in:is_new_job,is_driver',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',

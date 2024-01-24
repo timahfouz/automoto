@@ -34,14 +34,14 @@ class UpdateRequest extends FormRequest
             'bio' => 'nullable',
             'start_time' => 'required',
             'end_time' => 'required|after:start_time',
-            'geo_url' => 'nullable|min:50',
+            'geo_url' => 'nullable|min:20',
             'whatsapp' => 'nullable|min:11',
             'service_type' => 'nullable|in:is_new_job,is_driver',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',
             'bg_image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ];
 
-        if (!in_array(-1, request()->get('brands')) && !in_array(null, request()->get('brands'))) {
+        if (request()->filled('brands') && !in_array(-1, request()->get('brands')) && !in_array(null, request()->get('brands'))) {
             if (request()->filled('brands') && is_array(request()->get('brands'))) {
                 foreach(request()->get('brands') as $key => $value) {
                     $rules["brands.$key"] = 'required|exists:brands,id';
@@ -49,7 +49,7 @@ class UpdateRequest extends FormRequest
             }
         }
         
-        if (!in_array(null, request()->get('services'))) { 
+        if (request()->filled('services') && !in_array(null, request()->get('services'))) { 
             if (request()->filled('services') && is_array(request()->get('services'))) {
                 foreach(request()->get('services') as $key => $value) {
                     $rules["services.$key"] = 'required|exists:services,id';

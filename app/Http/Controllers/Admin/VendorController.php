@@ -110,13 +110,13 @@ class VendorController extends CRUDController
 
         $allBrands = $deleteBrands = $deleteServices = false;
 
-        if (in_array(-1, $request->brands)) {
+        if ($request->filled('brands') && in_array(-1, $request->brands)) {
             $allBrands = true;
         }
-        if (in_array(null, $request->brands)) {
+        if ($request->filled('brands') && in_array(null, $request->brands)) {
             $deleteBrands = true;
         }
-        if (in_array(null, $request->services)) {
+        if ($request->filled('services') && in_array(null, $request->services)) {
             $deleteServices = true;
         }
         
@@ -166,6 +166,49 @@ class VendorController extends CRUDController
             'geo_lon' => $longitude
         ];
     }
+    // function getLatLong($googleMapsLink) {
+    //     // Extract the place ID from the link
+    //     $urlParts = parse_url($googleMapsLink);
+    //     parse_str($urlParts['query'], $query);
+    //     $placeId = $query['map'];
+    
+    //     // Use Google Maps Geocoding API to get details based on the place ID
+    //     $apiEndpoint = "https://maps.googleapis.com/maps/api/geocode/json?place_id=$placeId&key=YOUR_GOOGLE_MAPS_API_KEY";
+    
+    //     // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual API key
+    //     // Make sure to enable the Geocoding API for your project in the Google Cloud Console
+    
+    //     $response = file_get_contents($apiEndpoint);
+    //     $data = json_decode($response, true);
+    
+    //     // Extract latitude and longitude from the API response
+    //     if ($data && $data['status'] === 'OK') {
+    //         $location = $data['results'][0]['geometry']['location'];
+    //         $latitude = $location['lat'];
+    //         $longitude = $location['lng'];
+            
+    //         return [
+    //             'geo_lat' => $latitude,
+    //             'geo_lon' => $longitude
+    //         ];
+
+    //     } else {
+    //          return [
+    //         'geo_lat' => null,
+    //         'geo_lon' => null
+    //     ];
+    //     }
+    // }
+    
+    // Example usage
+    // $googleMapsLink = 'https://maps.app.goo.gl/6cQXukVooQgqCFHV8';
+    // $coordinates = getLatLong($googleMapsLink);
+    
+    // if ($coordinates) {
+    //     echo "Latitude: {$coordinates['latitude']}, Longitude: {$coordinates['longitude']}";
+    // } else {
+    //     echo "Unable to retrieve coordinates.";
+    // }
 
     private function saveBrands($vendor, $brands, $allBrands = false, $deleteBrands = false)
     {

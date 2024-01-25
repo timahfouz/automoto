@@ -44,7 +44,7 @@ class ServiceController extends CRUDController
         
         $category = $this->pipeline->setModel('Category')->find($request->category_id);
         $data['for_jobs'] = $category->for_jobs;
-        $data['for_alarm'] = $category->for_alarm;
+        $data['for_alarm'] = $category->for_alarm ?? 0;
         
 
         if ($this->has_files) {

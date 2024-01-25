@@ -57,7 +57,6 @@ class CreateRequest extends FormRequest
             }
         }
         
-        
         return $rules;
     }
 }

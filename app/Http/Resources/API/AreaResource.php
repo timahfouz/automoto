@@ -4,7 +4,7 @@ namespace App\Http\Resources\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CarrierResource extends JsonResource
+class AreaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,11 @@ class CarrierResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'username' => $this->username,
-            'phone' => $this->phone,
-            'image' => getFullImagePath($this),
-            'access_token' => $this->when($this->access_token, $this->access_token)
+            'name' => $this->name,
+            // 'city' => [
+            //     'id' => $this->city,
+            //     'name' => $this->city->name,
+            // ],
         ];
     }
 }

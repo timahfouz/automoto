@@ -25,11 +25,11 @@ class CreateUserRequest extends ShapeRequest
     {
         return [
             'name'  => 'nullable|min:2',
-            'phone' => 'required|unique:users,phone',
-            'password' => 'nullable|min:8|confirmed',
-            'governorate_id' => 'nullable|exists:places,id',
-            'city_id' => 'nullable|exists:places,id',
-            'area_id' => 'nullable|exists:places,id',
+            'email' => 'required|unique:users,email',
+            'phone' => 'nullable|unique:users,phone',
+            'password' => 'required|min:6|confirmed',
+            // 'city_id' => 'nullable|exists:places,id',
+            // 'area_id' => 'nullable|exists:places,id',
             'image' => 'nullable|image',
         ];
     }

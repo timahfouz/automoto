@@ -7,16 +7,11 @@ use Illuminate\Http\Request;
 
 class FilterPlacesPipeline extends PipelineFactory
 {
-    private $id;
-
-    public function __construct($id = null)
-    {
-        $this->id = $id;
-    }
-
     protected function apply($builder)
     {
-        $builder = $builder->where('parent_id', $this->id);
+        $keywword = request()->keyword;
+
+        $builder = $builder->where('name', 'LIKE', "%$keywword%");
         
         return $builder;
     }

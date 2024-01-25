@@ -4,7 +4,7 @@ namespace App\Http\Resources\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResource extends JsonResource
+class CityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,8 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'status' => $this->status,
-            'status_tr' => translateStatus($this->status),
-            'is_special' => (bool)$this->is_special,
-            'ordered_at' => $this->created_at->format('d/m/Y'),
-            'carrier_phone' => $this->carrier->phone,
-            'rejection_reason' => $this->rejection_reason,
+            'name' => $this->name,
+            'areas' => AreaResource::collection($this->areas),
         ];
     }
 }

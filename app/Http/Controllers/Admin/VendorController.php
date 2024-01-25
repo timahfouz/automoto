@@ -74,12 +74,27 @@ class VendorController extends CRUDController
         $vendor = $this->pipeline->setModel($this->model)->create($data);
 
         $allBrands = false;
-        if (in_array(-1, $request->brands)) {
-            $allBrands = true;
+        $brands = $services = [];
+
+        if ($request->filled('brands') && is_array($request->brands)) {
+            $brands = $request->brands;
+            if (in_array(-1, $request->brands)) {
+                $allBrands = true;
+            }
+            if (in_array(null, $request->services)) {
+                $brands = [];
+            }
         }
         
-        $this->saveBrands($vendor, $request->brands ?? [], $allBrands);
-        $this->saveServices($vendor, $request->services ?? []);
+        if ($request->filled('services') && is_array($request->services)) {
+            $services = $request->services;
+            if (in_array(null, $request->services)) {
+                $services = [];
+            }
+        }
+        
+        $this->saveBrands($vendor, $brands, $allBrands);
+        $this->saveServices($vendor, $services);
 
         return redirect()->route($this->index_route)->with(['success' => 'Greeting']);
     }
@@ -109,19 +124,29 @@ class VendorController extends CRUDController
         $vendor->update($data);
 
         $allBrands = $deleteBrands = $deleteServices = false;
+        $brands = $services = [];
 
-        if ($request->filled('brands') && in_array(-1, $request->brands)) {
-            $allBrands = true;
-        }
-        if ($request->filled('brands') && in_array(null, $request->brands)) {
-            $deleteBrands = true;
-        }
-        if ($request->filled('services') && in_array(null, $request->services)) {
-            $deleteServices = true;
+        if ($request->filled('brands') && is_array($request->brands)) {
+            $brands = $request->brands;
+            if (in_array(-1, $request->brands)) {
+                $allBrands = true;
+            }
+            if (in_array(null, $request->brands)) {
+                $deleteBrands = true;
+                $brands = [];
+            }
         }
         
-        $this->saveBrands($vendor, $request->brands ?? [], $allBrands, $deleteBrands);
-        $this->saveServices($vendor, $request->services ?? [], $deleteServices);
+        if ($request->filled('services') && is_array($request->services)) {
+            $services = $request->services;
+            if (in_array(null, $request->services)) {
+                $services = [];
+                $deleteServices = true;
+            }
+        }
+        
+        $this->saveBrands($vendor, $brands, $allBrands, $deleteBrands);
+        $this->saveServices($vendor, $services, $deleteServices);
 
         return redirect()->route($this->index_route);
     }

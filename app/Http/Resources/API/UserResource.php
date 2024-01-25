@@ -17,21 +17,14 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'email' => $this->email,
             'phone' => $this->phone,
             'is_active' => (bool)$this->active,
             // 'activation_code' => $this->activation_code,
-            'governorate' => [
-                'id' => $this->governorate_id,
-                'name' => $this->governorate->name
-            ],
-            'city' => [
-                'id' => $this->city_id,
-                'name' => $this->city->name
-            ],
-            'area' => [
-                'id' => $this->area_id,
-                'name' => $this->area->name
-            ],
+            // 'city' => [
+            //     'id' => $this->city_id,
+            //     'name' => $this->city->name
+            // ],
             'image' => getFullImagePath($this),
             'access_token' => $this->when($this->access_token, $this->access_token)
         ];

@@ -10,7 +10,7 @@ class ShapeRequest extends FormRequest
 {
     protected function failedValidation(Validator $validator) 
     { 
-        throw new HttpResponseException( jsonResponse(422, $this->getMessages($validator->errors())) );
+        throw new HttpResponseException( jsonResponse([], 422, $this->getMessages($validator->errors())) );
     }
 
     private function getMessages($errors)

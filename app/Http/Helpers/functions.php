@@ -112,7 +112,7 @@ if (!function_exists('getCarrier')) {
 if (!function_exists('generateCode')) {
     function generateCode($digits=5) {
         $code = rand(pow(1, ($digits-1)), pow(10, $digits)-1);
-        $exists = User::where('activation_code', $code)->first();
+        $exists = User::where('verification_code', $code)->first();
         if ($exists)
             generateCode();
         return $code;

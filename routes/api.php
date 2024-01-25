@@ -35,7 +35,11 @@ Route::group(['namespace' => 'API'], function() {
         Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout'])->middleware('auth:api');
     });
     
-
+    Route::get('cities', ['as' => 'cities.index', 'uses' => 'CityController']);
+    Route::get('categories', ['as' => 'categories', 'uses' => 'CategoryController@index']);
+    
+    // Route::get('areas', ['as' => 'areas.index', 'uses' => 'AreaController']);
+    // Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);
     // Route::group(['middleware' => 'auth:api'], function() {
         
     //     Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);

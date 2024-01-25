@@ -10,20 +10,19 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\API\UserResource;
 use App\Http\Requests\API\CreateUserRequest;
 
-class AuthController extends Controller
-// class AuthController extends InitController
+class AuthController extends InitController
 {
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    // }
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function login(Request $request)
     {
-        $credentials = $request->only(['phone', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
         if (!$token = Auth::guard('api')->attempt($credentials)) {
-            return jsonResponse(401, 'Wrong phone or password!');
+            return jsonResponse(401, 'Wrong email or password!');
         }
         
         $user = Auth::guard('api')->user();
@@ -34,39 +33,33 @@ class AuthController extends Controller
         return jsonResponse(200, 'done.', $data);
     }
 
-    public function register(Request $request)
+    public function register(CreateUserRequest $request)
     {
         DB::beginTransaction();
         try {
-            $data = $request->only(['phone']);
+            $data = $request->only(['email','phone','name','password']);
             
-            $user = $this->pipeline->setModel('User')->where($data)->first();
-            if (!$user) {
-                if($request->hasFile('image')) {
-                    $path = resizeImage($request->image, 'uploads', $allSizes=false);
-                    $media = $this->pipeline->setModel('Media')->create(['path' => $path]);
-                    $data['image_id'] = $media->id;
-                }
-                $data['password'] = Hash::make('123456');
-                $code = $data['activation_code'] = generateCode();
-                $user = $this->pipeline->setModel('User')->create($data);
-                $user->access_token = auth()->guard('api')->tokenById($user->id);
-
-                sendSMS($request->phone, "Your minutes code is: $code");
-            } else {
-                $access_token = Auth::guard('api')->login($user);
-                $user->access_token = $access_token;
+            if($request->hasFile('image')) {
+                $imageID = resizeImage($request->image, 'uploads', [200, 200]);
+                $data['image_id'] = $imageID;
             }
+            
+            $code = $data['verification_code'] = generateCode();
+            
+            $user = $this->pipeline->setModel('User')->create($data);
+            $user->access_token = auth()->guard('api')->tokenById($user->id);
+            // sendSMS($request->phone, "Your Automoto code is: $code");
+
             $data = new UserResource($user);
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-
-            return jsonResponse($e->getCode(), $e->getMessage());
+            
+            return jsonResponse([], $e->getCode(), $e->getMessage());
         }
         
-        return jsonResponse(201, 'done.', $data);
+        return jsonResponse($data, 201, 'done.');
     }
 
     public function resendCode(Request $request)
@@ -76,7 +69,7 @@ class AuthController extends Controller
         if (!$user) {
             return jsonResponse(404, 'not found.');
         }
-        sendSMS($phone, "Your minutes code is: $user->activation_code");
+        // sendSMS($phone, "Your Automoto code is: $user->activation_code");
 
         return jsonResponse(200, 'done.');
     }

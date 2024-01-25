@@ -81,7 +81,7 @@ class VendorController extends CRUDController
             if (in_array(-1, $request->brands)) {
                 $allBrands = true;
             }
-            if (in_array(null, $request->services)) {
+            if (in_array(null, $request->brands)) {
                 $brands = [];
             }
         }
@@ -126,7 +126,7 @@ class VendorController extends CRUDController
         $allBrands = $deleteBrands = $deleteServices = false;
         $brands = $services = [];
 
-        if ($request->filled('brands') && is_array($request->brands)) {
+        if ($request->brands && $request->filled('brands') && is_array($request->brands)) {
             $brands = $request->brands;
             if (in_array(-1, $request->brands)) {
                 $allBrands = true;
@@ -137,7 +137,7 @@ class VendorController extends CRUDController
             }
         }
         
-        if ($request->filled('services') && is_array($request->services)) {
+        if ($request->services && $request->filled('services') && is_array($request->services)) {
             $services = $request->services;
             if (in_array(null, $request->services)) {
                 $services = [];

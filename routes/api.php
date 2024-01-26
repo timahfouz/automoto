@@ -40,6 +40,7 @@ Route::group(['namespace' => 'API'], function() {
     Route::get('brands', ['as' => 'brands', 'uses' => 'BrandController']);
     Route::get('services/{categoryID}', ['as' => 'services', 'uses' => 'ServiceController']);
     Route::post('vendors', ['as' => 'vendors', 'uses' => 'VendorController']);
+    Route::get('reviews/{vendorID}', ['as' => 'reviews', 'uses' => 'ReviewController']);
     
     // Route::get('areas', ['as' => 'areas.index', 'uses' => 'AreaController']);
     // Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);

@@ -30,7 +30,7 @@ class AuthController extends InitController
 
         $data = new UserResource($user);
 
-        return jsonResponse(200, 'done.', $data);
+        return jsonResponse(code: 200, message: 'done.', data: $data);
     }
 
     public function register(CreateUserRequest $request)
@@ -59,7 +59,7 @@ class AuthController extends InitController
             return jsonResponse([], $e->getCode(), $e->getMessage());
         }
         
-        return jsonResponse($data, 201, 'done.');
+        return jsonResponse(code: 201, message: 'done.', data: $data);
     }
 
     public function resendCode(Request $request)
@@ -71,7 +71,7 @@ class AuthController extends InitController
         }
         // sendSMS($phone, "Your Automoto code is: $user->activation_code");
 
-        return jsonResponse(200, 'done.');
+        return jsonResponse(code: 200, message: 'done.');
     }
 
     public function activate(Request $request)
@@ -86,13 +86,13 @@ class AuthController extends InitController
 
         $user->update(['active' => 1,'activation_code' => null]);
 
-        return jsonResponse(201, 'done.');
+        return jsonResponse(code: 200, message: 'done.');
     }
 
     public function logout()
     {
         Auth::guard('api')->logout();
         
-        return jsonResponse(200);
+        return jsonResponse(code: 200);
     }
 }

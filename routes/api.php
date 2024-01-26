@@ -36,7 +36,10 @@ Route::group(['namespace' => 'API'], function() {
     });
     
     Route::get('cities', ['as' => 'cities.index', 'uses' => 'CityController']);
-    Route::get('categories', ['as' => 'categories', 'uses' => 'CategoryController@index']);
+    Route::get('categories', ['as' => 'categories', 'uses' => 'CategoryController']);
+    Route::get('brands', ['as' => 'brands', 'uses' => 'BrandController']);
+    Route::get('services/{categoryID}', ['as' => 'services', 'uses' => 'ServiceController']);
+    Route::post('vendors', ['as' => 'vendors', 'uses' => 'VendorController']);
     
     // Route::get('areas', ['as' => 'areas.index', 'uses' => 'AreaController']);
     // Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);

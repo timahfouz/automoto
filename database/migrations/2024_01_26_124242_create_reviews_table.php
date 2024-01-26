@@ -13,13 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('alarms', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('vendor_id');
+            $table->float('rate')->default(5.0);
+            $table->text('review')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->timestamps();
+            $table->foreign('vendor_id')->references('id')->on('vendors');
+            $table->timestamps();            
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alarms');
+        Schema::dropIfExists('reviews');
     }
 };

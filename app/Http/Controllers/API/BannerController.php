@@ -19,7 +19,7 @@ class BannerController extends InitController
         $data = $this->pipeline->get();
 
         $response = BannerResource::collection($data);
-
-        return jsonResponse(200, 'done.', $response);   
+        
+        return jsonResponse(code: 200, message: 'done.', data: $response);
     }
 }

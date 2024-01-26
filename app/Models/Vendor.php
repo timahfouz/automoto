@@ -20,6 +20,11 @@ class Vendor extends Model
     {
         return $this->belongsTo(Media::class, 'image_id')->withDefault();
     }
+    
+    public function bgImage()
+    {
+        return $this->belongsTo(Media::class, 'bg_image_id')->withDefault();
+    }
 
     public function category()
     {
@@ -34,6 +39,11 @@ class Vendor extends Model
     public function area()
     {
         return $this->belongsTo(City::class, 'area_id')->withDefault();
+    }
+    
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'vendor_id');
     }
     
     public function services()

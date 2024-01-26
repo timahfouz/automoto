@@ -5,9 +5,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use phpDocumentor\Reflection\Types\Mixed_;
 
 if (!function_exists('jsonResponse')) {
-    function jsonResponse($data = [], $code = 200, $message = 'done') {
+    function jsonResponse(int $code = 200, string $message = 'done', Mixed $data = []) {
         $code = getCode($code);
         return response()->json([
             'status_code' => $code,

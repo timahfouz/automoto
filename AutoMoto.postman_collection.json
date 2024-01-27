@@ -729,12 +729,16 @@
 	"variable": [
 		{
 			"key": "localhost",
-			"value": "http://127.0.0.1:8000/api",
+			"value": "localhost/automoto/public/api",
 			"type": "string"
 		},
 		{
 			"key": "token",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2F1dG9tb3RvL3B1YmxpYy9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTcwNjE2NTk4NCwiZXhwIjoxNzA2MTY5NTg0LCJuYmYiOjE3MDYxNjU5ODQsImp0aSI6Im1iQ0s4VmJ4eFlocTd3eWciLCJzdWIiOiI4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.E39nOVcs_jybunicX3XYS7n8Q12GTdCeS9SBVQQj9vI",
+			"type": "string"
+		},
+		{
+			"value": "",
 			"type": "string"
 		}
 	]

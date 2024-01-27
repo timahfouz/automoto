@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('image_id');
+            $table->text('description')->nullable();
             $table->foreign('image_id')->references('id')->on('media');
             $table->timestamps();
         });

@@ -43,7 +43,7 @@ Route::group(['namespace' => 'API'], function() {
     Route::get('reviews/{vendorID}', ['as' => 'reviews', 'uses' => 'ReviewController']);
     Route::get('jobs', ['as' => 'jobs', 'uses' => 'JobController']);
     Route::get('drivers', ['as' => 'drivers', 'uses' => 'DriverController']);
-    
+    Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);
     
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('favorites/{vendorID}', ['as' => 'favorites.toggle', 'uses' => 'FavoriteController']);
@@ -52,36 +52,6 @@ Route::group(['namespace' => 'API'], function() {
         Route::post('brands-alert', ['as' => 'brands.alert', 'uses' => 'BrandAlertController']);
         Route::get('brands-alert', ['as' => 'alerts', 'uses' => 'BrandAlertController@index']);
     });
-
-    // Route::get('areas', ['as' => 'areas.index', 'uses' => 'AreaController']);
-    // Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);
-    // Route::group(['middleware' => 'auth:api'], function() {
-        
-    //     Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);
-    //     Route::get('notifications', ['as' => 'notifications', 'uses' => 'NotificationController']);
-
-    //     Route::get('sections', ['as' => 'categories', 'uses' => 'CategoryController@sections']);
-    //     Route::get('categories', ['as' => 'categories', 'uses' => 'CategoryController@index']);
-    //     Route::get('products', ['as' => 'products', 'uses' => 'ProductController']);
-    //     Route::get('products/random', ['as' => 'products.random', 'uses' => 'ProductController@randomItems']);
-    //     Route::get('offers/{type}', ['as' => 'offers', 'uses' => 'OfferController']);
-
-    //     Route::apiResource('carts', 'CartController');
-    //     Route::post('checkout', ['as' => 'order.checkout', 'uses' => 'OrderController']);
-    //     Route::post('special-order', ['as' => 'order.special', 'uses' => 'OrderController@special']);
-    //     Route::get('orders', ['as' => 'orders.index', 'uses' => 'OrderController@index']);
-    //     Route::get('orders/{id}', ['as' => 'orders.show', 'uses' => 'OrderController@show']);
-    //     Route::get('settings/{key}', ['as' => 'settings', 'uses' => 'SettingsController']);
-        
-    //     Route::get('coupon/{code}', ['as' => 'coupon', 'uses' => 'OrderController@coupon']);
-    //     Route::get('fees', ['as' => 'fees', 'uses' => 'SettingsController@fees']);
-
-    //     Route::post('contact-us', ['as' => 'contact-us', 'uses' => 'SettingsController@contactUs']);
-    
-    // });
-
-
-    // Route::group(['prefix' => 'carrier','namespace' => 'Carrier', 'as' => 'carrier.'], function () {
 
     //     Route::group(['prefix' => 'auth'], function () {
     //         Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);

@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth:admin'], 'namespace' => 'Admin', 'as' => 'a
 
     Route::resource('brands', 'BrandController');
 
+    Route::resource('banners', 'BannerController');
+
     Route::resource('services', 'ServiceController');
 
     Route::resource('vendors', 'VendorController');

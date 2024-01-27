@@ -1,0 +1,741 @@
+{
+	"info": {
+		"_postman_id": "c71dccc4-0955-4ce7-9bcd-e4a53fd40e80",
+		"name": "AutoMoto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2966772"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "timahfouz262@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "shams@automoto.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01004159059",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ahmed Shams",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/flutter-work/minutes/assets/images/ic_flag.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/register",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "All Cities",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/cities",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Categories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/categories",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"categories"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "lon",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Brands",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/brands",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"brands"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "lon",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category Services",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/services/12",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"services",
+						"12"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "lon",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "Service Vendors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/vendors?lat=30.012574&lon=31.271516&serviceID=6&cityId=2&areaID=4",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"vendors"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "30.012574"
+						},
+						{
+							"key": "lon",
+							"value": "31.271516"
+						},
+						{
+							"key": "serviceID",
+							"value": "6"
+						},
+						{
+							"key": "cityId",
+							"value": "2"
+						},
+						{
+							"key": "areaID",
+							"value": "4"
+						}
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "Brand Vendors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/vendors?lat=30.012574&lon=31.271516&brandID=3&cityId=2&areaID=4",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"vendors"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "30.012574"
+						},
+						{
+							"key": "lon",
+							"value": "31.271516"
+						},
+						{
+							"key": "brandID",
+							"value": "3"
+						},
+						{
+							"key": "cityId",
+							"value": "2"
+						},
+						{
+							"key": "areaID",
+							"value": "4"
+						}
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor Reviews",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/reviews/27",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"reviews",
+						"27"
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "Category Jobs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/jobs?category_id=13&city_id=2&area_id=4",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"jobs"
+					],
+					"query": [
+						{
+							"key": "category_id",
+							"value": "13"
+						},
+						{
+							"key": "city_id",
+							"value": "2"
+						},
+						{
+							"key": "area_id",
+							"value": "4"
+						}
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "Category Drivers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/drivers?category_id=13&city_id=2&area_id=4",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"drivers"
+					],
+					"query": [
+						{
+							"key": "category_id",
+							"value": "13"
+						},
+						{
+							"key": "city_id",
+							"value": "2"
+						},
+						{
+							"key": "area_id",
+							"value": "4"
+						}
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "All Banners",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/banners",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"banners"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Vendor To Favorites",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/favorites/27",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"favorites",
+						"27"
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "My Favorite List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/favorites",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"favorites"
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "Make Brands Alert",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "brands[0]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "brands[1]",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "brands[2]",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "brands[3]",
+							"value": "41",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{localhost}}/brands-alert",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"brands-alert"
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		},
+		{
+			"name": "Alerted Brands",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{localhost}}/brands-alert",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"brands-alert"
+					]
+				},
+				"description": "12 is an example for the supported categoryID"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2F1dG9tb3RvL3B1YmxpYy9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTcwNjE2NTk4NCwiZXhwIjoxNzA2MTY5NTg0LCJuYmYiOjE3MDYxNjU5ODQsImp0aSI6Im1iQ0s4VmJ4eFlocTd3eWciLCJzdWIiOiI4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.E39nOVcs_jybunicX3XYS7n8Q12GTdCeS9SBVQQj9vI",
+			"type": "string"
+		}
+	]
+}

@@ -64,8 +64,8 @@ class ServiceController extends CRUDController
 
         $category = $this->pipeline->setModel('Category')->find($request->category_id);
 
-        $data['for_jobs'] = $category->for_jobs;
-        $data['for_alarm'] = $category->for_alarm;
+        $data['for_jobs'] = $category->for_jobs ?? 0;
+        $data['for_alarm'] = $category->for_alarm ?? 0;
 
         $obj = $this->pipeline->setModel($this->model)->findOrFail($id);
 

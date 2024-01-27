@@ -16,7 +16,7 @@
 </div>
 
 
-<div class="row">
+{{-- <div class="row">
     <div class="form-group mb-4 col-md-6">
         <label for="city_id"> Select City:</label>
         <select required class="form-control" id="city_id" name="city_id">
@@ -25,7 +25,7 @@
             @endforeach
         </select>
     </div>
-</div>
+</div> --}}
 
 <div class="row">
     <div class="form-group mb-4 col-md-6">

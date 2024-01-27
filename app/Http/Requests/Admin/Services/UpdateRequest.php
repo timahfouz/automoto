@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2',
-            'city_id' => 'required|exists:cities,id',
+            'city_id' => 'nullable|exists:cities,id',
             'category_id' => 'required|exists:categories,id',
             // 'brand_id' => 'nullable|exists:brands,id',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',

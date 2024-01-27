@@ -56,6 +56,21 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Media::class, 'image_id')->withDefault();
     }
     
+    public function favorites()
+    {
+        return $this->belongsToMany(Vendor::class, Favorite::class, 'user_id', 'vendor_id');
+    }
+    
+    public function alerts()
+    {
+        return $this->hasMany(Alarm::class, 'user_id');
+    }
+    
+    public function brandsAlert()
+    {
+        return $this->belongsToMany(Brand::class, Alarm::class, 'user_id', 'brand_id');
+    }
+
     // JWT
     public function getJWTIdentifier()
     {

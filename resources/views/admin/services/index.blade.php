@@ -26,7 +26,7 @@
                     <tr>
                         <th class="">Service ID</th>
                         <th class="">Service Name</th>
-                        <th class="">City</th>
+                        {{-- <th class="">City</th> --}}
                         <th class="">Category</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -41,9 +41,9 @@
                                 <img class="avatar" src="{{ imagePath($item->image->path) }}" alt="">
                                 {{ $item->name }}
                             </td>
-                            <td class="checkbox-column">
+                            {{-- <td class="checkbox-column">
                                 {{ $item->city->name }}
-                            </td>
+                            </td> --}}
                             <td class="checkbox-column">
                                 <img class="avatar" src="{{ $item->category ? imagePath($item->category->image->path) : '' }}" alt="">
                                 {{ $item->category->name }}

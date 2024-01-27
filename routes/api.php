@@ -39,9 +39,20 @@ Route::group(['namespace' => 'API'], function() {
     Route::get('categories', ['as' => 'categories', 'uses' => 'CategoryController']);
     Route::get('brands', ['as' => 'brands', 'uses' => 'BrandController']);
     Route::get('services/{categoryID}', ['as' => 'services', 'uses' => 'ServiceController']);
-    Route::post('vendors', ['as' => 'vendors', 'uses' => 'VendorController']);
+    Route::get('vendors', ['as' => 'vendors', 'uses' => 'VendorController']);
     Route::get('reviews/{vendorID}', ['as' => 'reviews', 'uses' => 'ReviewController']);
+    Route::get('jobs', ['as' => 'jobs', 'uses' => 'JobController']);
+    Route::get('drivers', ['as' => 'drivers', 'uses' => 'DriverController']);
     
+    
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::post('favorites/{vendorID}', ['as' => 'favorites.toggle', 'uses' => 'FavoriteController']);
+        Route::get('favorites', ['as' => 'favorites', 'uses' => 'FavoriteController@index']);
+
+        Route::post('brands-alert', ['as' => 'brands.alert', 'uses' => 'BrandAlertController']);
+        Route::get('brands-alert', ['as' => 'alerts', 'uses' => 'BrandAlertController@index']);
+    });
+
     // Route::get('areas', ['as' => 'areas.index', 'uses' => 'AreaController']);
     // Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);
     // Route::group(['middleware' => 'auth:api'], function() {

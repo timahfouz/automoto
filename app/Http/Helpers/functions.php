@@ -102,14 +102,6 @@ if (!function_exists('getUser')) {
     }
 }
 
-if (!function_exists('getCarrier')) {
-    function getCarrier() {
-        return Auth::guard('carrier')->user();
-    }
-}
-
-
-
 if (!function_exists('generateCode')) {
     function generateCode($digits=5) {
         $code = rand(pow(1, ($digits-1)), pow(10, $digits)-1);

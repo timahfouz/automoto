@@ -15,4 +15,3 @@
             name="description" placeholder="Why you're creating this banner?" >{{old('description', (isset($item) ? $item->description : ''))}}</textarea>
     </div>
 </div>
-

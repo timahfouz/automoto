@@ -1,7 +1,9 @@
+<x-admin.error-feedback />
+
 <div class="row">
     <div class="form-group mb-4 col-md-4">
         <label for="name"> Choose Image: </label>
-        <input required type="file" class="form-control" id="image"
+        <input type="file" class="form-control" id="image"
             name="image">
     </div>
 </div>

@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'description' => 'nullable|min:10',
-            'image' => 'required|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif',
         ];
     }
 }

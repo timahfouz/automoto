@@ -16,6 +16,7 @@ class VendorController extends InitController
     
     public function __invoke(Request $request)
     {
+        $categoryID = $request->categoryID;
         $serviceID = $request->serviceID;
         $brandID = $request->brandID;
         $cityId = $request->cityId;
@@ -39,6 +40,9 @@ class VendorController extends InitController
                 'city_id' => $cityId,
                 'area_id' => $areaID,
             ]);
+            if ($categoryID) {
+                $query = $query->where('category_id', $categoryID);
+            }
             if ($serviceID) {
                 $query = $query->whereHas('getServices', function ($sql) use ($serviceID) {
                     $sql->where('services.id', $serviceID);

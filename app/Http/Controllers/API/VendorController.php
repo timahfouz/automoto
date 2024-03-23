@@ -22,8 +22,8 @@ class VendorController extends InitController
         $cityId = $request->cityId;
         $areaID = $request->areaID;
 
-        $lat = $request->lat;
-        $lon = $request->lon;
+        $lat = $request->lat ?? 0.0;
+        $lon = $request->lon ?? 0.0;
         $distance = 5; // In in Kilometers
 
         // $places = DB::table('vendors')

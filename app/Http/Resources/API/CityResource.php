@@ -17,7 +17,7 @@ class CityResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'areas' => AreaResource::collection($this->areas),
+            // 'areas' => AreaResource::collection($this->areas),
         ];
     }
 }

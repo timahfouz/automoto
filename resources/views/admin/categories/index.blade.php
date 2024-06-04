@@ -28,6 +28,8 @@
                         <th class="">Default Category</th>
                         <th class="">Brands Category</th>
                         <th class="">Job Category</th>
+                        <th class="">Visible</th>
+                        <th class="">Order</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -47,7 +49,12 @@
                             <td class="checkbox-column">
                                 <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->for_jobs ? 'up' : 'down' }} text-{{ $item->for_jobs ? 'primary' : 'danger' }}"></span>
                             </td>
-
+                            <td class="checkbox-column">
+                                <span style="font-size: 18px;" class="fa fa-thumbs-{{ $item->visible ? 'up' : 'down' }} text-{{ $item->visible ? 'primary' : 'danger' }}"></span>
+                            </td>
+                            <td class="checkbox-column">
+                                {{ $item->order }}
+                            </td>
                             <td class="text-center">
                                 <a data-toggle="tooltip" href="{{ route('admin.categories.edit', $item->id) }}"
                                 data-placement="top" title="" data-original-title="Edit">
@@ -60,7 +67,7 @@
                                     </svg>
                                 </a>
 
-                                <button style="border: 0;background: none" type="button"  data-placement="top" title=""
+                                {{-- <button style="border: 0;background: none" type="button"  data-placement="top" title=""
                                         data-original-title="Delet" data-toggle="modal" data-target="#deleteModal{{$item->id}}">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -74,7 +81,7 @@
                                         <line x1="14" y1="11" x2="14" y2="17"></line>
                                     </svg>
                                 </button>
-                                <x-admin.delete-modal :route="$delte_route" :id="$item->id" />
+                                <x-admin.delete-modal :route="$delte_route" :id="$item->id" /> --}}
                             </td>
                         </tr>
                         @endforeach

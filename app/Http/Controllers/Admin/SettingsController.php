@@ -24,9 +24,18 @@ class SettingsController extends Controller
         $privacy = $data->where('key','privacy')->first()->value ?? '';
         $about = $data->where('key','about')->first()->value ?? '';
 
+        $twitter = $data->where('key','twitter')->first()->value ?? '';
+        $instagram = $data->where('key','instagram')->first()->value ?? '';
+        $facebook = $data->where('key','facebook')->first()->value ?? '';
+        $website = $data->where('key','website')->first()->value ?? '';
+
         return view('admin.settings.index')->with([
             'privacy' => $privacy,
             'about'=> $about,
+            'twitter'=> $twitter,
+            'instagram'=> $instagram,
+            'facebook'=> $facebook,
+            'website'=> $website,
         ]);
     }
     

@@ -36,6 +36,8 @@ class VendorResource extends JsonResource
             'distance' => $distance,
             'city' => new AreaResource($this->city), // Using Area Resource which get only Id and Name, City Resource return all areas which doesn't needed
             'area' => new AreaResource($this->area),
+            'category' => new CategoryResource($this->category),
+            'brands' => BrandResource::collection($this->getBrands)
         ];
     }
 }

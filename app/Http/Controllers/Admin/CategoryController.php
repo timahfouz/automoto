@@ -75,6 +75,8 @@ class CategoryController extends CRUDController
             $data['for_brands'] = 1;
         }
         
+        // return $data;
+
         $obj->update($data);
 
         return redirect()->route($this->index_route);

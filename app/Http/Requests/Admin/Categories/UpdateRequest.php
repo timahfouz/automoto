@@ -26,6 +26,8 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|unique:categories,name,'.$this->segment(3),
             'image' => 'nullable|mimes:jpeg,png,jpg,gif',
+            'visible' => 'nullable|numeric',
+            'order' => 'nullable|numeric',
         ];
     }
 }

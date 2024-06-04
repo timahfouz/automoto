@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Resources\API\VendorResource;
+use App\Pipelines\Criterias\SearchVendorsPipeline;
 use DB;
 use Illuminate\Http\Request;
 
@@ -21,14 +22,19 @@ class VendorController extends InitController
         $brandID = $request->brandID;
         $cityId = $request->cityId;
         $areaID = $request->areaID;
+        $keyword = $request->keyword;
 
-        $lat = $request->lat ?? 0.0;
-        $lon = $request->lon ?? 0.0;
-        $distance = 5; // In in Kilometers
+        $lat = $request->lat;
+        $lon = $request->lon;
+        // $distance = 5; // In in Kilometers
 
         // $places = DB::table('vendors')
-        $query = $this->pipeline
-            ->select('*',
+        $query = $this->pipeline;
+
+        $this->pipeline->pushPipeline(new SearchVendorsPipeline($request));
+
+        if ($lat && $lon) {
+            $query = $query->select('*',
                 DB::raw('(6371 * 2 * ASIN(
                     SQRT(
                         POWER(SIN((RADIANS(geo_lat) - RADIANS(' . $lat . ')) / 2), 2) +
@@ -36,16 +42,9 @@ class VendorController extends InitController
                     )
                 )) AS distance')
             );
+        }
         
-        if ($cityId) {
-            $query = $query->where(['city_id' => $cityId,]);
-        }
-        if ($areaID) {
-            $query = $query->where(['area_id' => $areaID,]);
-        }
-        if ($categoryID) {
-            $query = $query->where('category_id', $categoryID);
-        }
+        
         if ($serviceID) {
             $query = $query->whereHas('getServices', function ($sql) use ($serviceID) {
                 $sql->where('services.id', $serviceID);
@@ -56,9 +55,22 @@ class VendorController extends InitController
                 $sql->where('brands.id', $brandID);
             });
         }
-            
-        $query->having('distance', '<=', $distance)
-            ->orderBY('distance', 'ASC');
+        
+        if ($cityId) {
+            $query = $query->where(['city_id' => $cityId,]);
+        }
+        if ($areaID) {
+            $query = $query->where(['area_id' => $areaID,]);
+        }
+        if ($categoryID) {
+            $query = $query->where('category_id', $categoryID);
+        }
+        
+        if ($lat && $lon) {
+            // $query->having('distance', '<=', $distance)
+            $query->orderBY('distance', 'ASC');  
+        }
+        
         
         $data = $query->get();
         // return $query->toSql();

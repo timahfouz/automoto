@@ -16,7 +16,7 @@ class CategoryController extends InitController
     
     public function __invoke()
     {
-        $data = $this->pipeline->get();
+        $data = $this->pipeline->where('visible', 1)->orderBy('order', 'DESC')->get();
 
         $response = CategoryResource::collection($data);
 

@@ -45,6 +45,7 @@ Route::group(['namespace' => 'API'], function() {
     Route::get('jobs', ['as' => 'jobs', 'uses' => 'JobController']);
     Route::get('drivers', ['as' => 'drivers', 'uses' => 'DriverController']);
     Route::get('banners', ['as' => 'banners', 'uses' => 'BannerController']);
+    Route::get('settings/{key}', ['as' => 'settings', 'uses' => 'SettingsController']);
     
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('favorites/{vendorID}', ['as' => 'favorites.toggle', 'uses' => 'FavoriteController']);
@@ -52,6 +53,7 @@ Route::group(['namespace' => 'API'], function() {
 
         Route::post('brands-alert', ['as' => 'brands.alert', 'uses' => 'BrandAlertController']);
         Route::get('brands-alert', ['as' => 'alerts', 'uses' => 'BrandAlertController@index']);
+        Route::get('notifications', ['as' => 'notifications', 'uses' => 'NotificationController']);
     });
 
     //     Route::group(['prefix' => 'auth'], function () {

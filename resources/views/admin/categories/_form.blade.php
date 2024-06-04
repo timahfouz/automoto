@@ -27,3 +27,19 @@
 </div>
 
 
+<div class="row">
+    <div class="form-group mb-4 col-md-4">
+        <label for="visible"> Is Visible:</label>
+        <select class="form-control" id="visible" name="visible">
+            <option value="1">إظهار</option>
+            <option {{(isset($item) ? !$item->visible ? 'selected' : '' : '')}} value="0">إخفاء</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-4 col-md-6">
+        <label for="order"> Order:</label>
+        <input type="number" step="1" min="1" class="form-control @error('order') is-invalid @enderror" id="order"
+            name="order" placeholder="order" value="{{old('order', (isset($item) ? $item->order : ''))}}">
+    </div>
+
+</div>

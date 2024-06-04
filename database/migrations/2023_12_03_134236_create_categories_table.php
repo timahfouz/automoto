@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('image_id')->nullable();
             $table->boolean('for_jobs')->default(0);
             $table->boolean('for_alarm')->default(0);
+            $table->integer('order')->default(1);
+            $table->boolean('visible')->default(1);
             $table->foreign('image_id')->references('id')->on('media')->onDelete('set null');
             $table->timestamps();
         });

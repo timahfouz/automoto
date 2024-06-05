@@ -19,12 +19,13 @@ class SearchVendorsPipeline extends PipelineFactory
         $keyword = $this->request->get('keyword');
 
         if ($this->request->filled('keyword')) {
-            $builder = $builder->where('name', 'LIKE' , "%$keyword%")
+            $builder = $builder->where(function($sql) use($keyword) {
+                $sql->where('name', 'LIKE' , "%$keyword%")
                 ->orWhere('bio', 'LIKE' , "%$keyword%")
                 ->orWhere('phone', 'LIKE' , "%$keyword%")
                 ->orWhere('whatsapp', 'LIKE' , "%$keyword%");
+            });
         }
-        
         return $builder;
     }
 }

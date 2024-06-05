@@ -12,17 +12,18 @@
 </div>
 
 
+
 <div class="row">
     <div class="form-group mb-4 col-md-6">
-        <label for="twitter"> Twitter:</label>
-        <input type="text" required class="form-control @error('twitter') is-invalid @enderror" id="name"
-            name="twitter" placeholder="Twitter" value="{{old('name', (isset($twitter) ? $twitter : ''))}}">
+        <label for="phone"> Phone:</label>
+        <input type="text" required class="form-control @error('phone') is-invalid @enderror" id="name"
+            name="phone" placeholder="phone" value="{{old('name', (isset($phone) ? $phone : ''))}}">
     </div>
 
     <div class="form-group mb-4 col-md-6">
-        <label for="instagram"> Instagram:</label>
-        <input type="text" required class="form-control @error('instagram') is-invalid @enderror" id="name"
-            name="instagram" placeholder="Instagram" value="{{old('name', (isset($instagram) ? $instagram : ''))}}">
+        <label for="whatsapp"> Whatsapp:</label>
+        <input type="text" required class="form-control @error('whatsapp') is-invalid @enderror" id="name"
+            name="whatsapp" placeholder="whatsapp" value="{{old('name', (isset($whatsapp) ? $whatsapp : ''))}}">
     </div>
 </div>
 

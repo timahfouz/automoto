@@ -19,7 +19,7 @@ class SettingsController extends InitController
     {   
         $response = [];
         if($key == 'contacts') {
-            $data = $this->pipeline->whereIn('key',['twitter','instagram','facebook','website'])->get();
+            $data = $this->pipeline->whereIn('key',['phone','whatsapp','facebook','website'])->get();
             foreach ($data as $item) {
                 $response[$item['key']] = $item['value'];
             }

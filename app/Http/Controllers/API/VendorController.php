@@ -44,6 +44,15 @@ class VendorController extends InitController
             );
         }
         
+        if ($cityId) {
+            $query = $query->where(['city_id' => $cityId,]);
+        }
+        if ($areaID) {
+            $query = $query->where(['area_id' => $areaID,]);
+        }
+        if ($categoryID) {
+            $query = $query->where('category_id', $categoryID);
+        }
         
         if ($serviceID) {
             $query = $query->whereHas('getServices', function ($sql) use ($serviceID) {
@@ -55,25 +64,16 @@ class VendorController extends InitController
                 $sql->where('brands.id', $brandID);
             });
         }
-        
-        if ($cityId) {
-            $query = $query->where(['city_id' => $cityId,]);
-        }
-        if ($areaID) {
-            $query = $query->where(['area_id' => $areaID,]);
-        }
-        if ($categoryID) {
-            $query = $query->where('category_id', $categoryID);
-        }
-        
+
         if ($lat && $lon) {
             // $query->having('distance', '<=', $distance)
             $query->orderBY('distance', 'ASC');  
         }
         
         
-        $data = $query->get();
         // return $query->toSql();
+        $data = $query->get();
+
         // $data = $this->pipeline->where('service_id', $serviceID)->get();
 
         $response = VendorResource::collection($data);
